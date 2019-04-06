@@ -1,17 +1,19 @@
 {% extends "base/base.html" %}
+{% load static %}
 
 {% block content %}
 
-<div class="container">
-  <h2>Rounded Corners</h2>
-  <p>The .rounded class adds rounded corners to an image:</p>
-  <img src="MOTW_Cover.jpg" class="rounded" alt="Cinque Terre" width="304" height="236">
+
+<div style="alignment: center;padding-left: 350px">
+  <img src="{% static "MOTW_Cover.jpg" %}" alt="Cinque Terre" width="800" height="236">
 </div>
 
-<div style="padding-left:15px">
+<div style="padding-top:15px;alignment: center">
     <div>
-        <p>BEGIN</p>
-        <p>Hi World</p>
+        <center><font size="15">About monster of the week</font></center>
+        <p>
+           <center>THIS IS WHERE WE WILL BE TALKING ABOUT SOME DOPE ASS SHIT</center>
+        </p>
     </div>
 </div>
 
