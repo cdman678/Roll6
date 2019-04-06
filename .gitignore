@@ -1,2 +1,5 @@
 /.idea
 /venv
+
+__pycharm__/
+db.sqlite3
