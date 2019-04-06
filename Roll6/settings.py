@@ -31,13 +31,15 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
+    'Roll6.apps.game',
+    'Roll6.apps.signin',
+    'Roll6.apps.dashboard',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'Roll6.apps.signin',
 ]
 
 MIDDLEWARE = [
@@ -55,8 +57,10 @@ ROOT_URLCONF = 'Roll6.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [os.path.join(BASE_DIR, "Roll6" , 'templates'),
-                 os.path.join(BASE_DIR, 'Roll6', 'apps', 'signin', 'templates')
+
+        'DIRS': [os.path.join(BASE_DIR, "Roll6", 'templates'),
+                 os.path.join(BASE_DIR, 'Roll6', 'apps', 'signin', 'templates'),
+                 os.path.join(BASE_DIR, 'Roll6', 'apps', 'game', 'templates')
                  ]
         ,
         'APP_DIRS': True,
@@ -128,3 +132,4 @@ STATICFILES_DIRS = (
 )
 
 LOGIN_REDIRECT_URL = '/'
+
