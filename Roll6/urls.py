@@ -16,9 +16,10 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include
 
-from Roll6.apps import signin
+from Roll6.apps import signin, game
 
 urlpatterns = [
     path('', include('Roll6.apps.signin.urls')),
+    path('game/', include('Roll6.apps.game.urls')),
     path('admin/', admin.site.urls),
 ]
