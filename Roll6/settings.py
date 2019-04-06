@@ -56,6 +56,7 @@ ROOT_URLCONF = 'Roll6.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
+
         'DIRS': [os.path.join(BASE_DIR, "Roll6", 'templates'),
                  os.path.join(BASE_DIR, 'Roll6', 'apps', 'signin', 'templates'),
                  os.path.join(BASE_DIR, 'Roll6', 'apps', 'game', 'templates')
@@ -126,5 +127,5 @@ USE_TZ = True
 STATIC_URL = '/static/'
 
 STATICFILES_DIRS = (
-    os.path.join(BASE_DIR, 'static'),
+    os.path.join(BASE_DIR, 'Roll6/static'),
 )

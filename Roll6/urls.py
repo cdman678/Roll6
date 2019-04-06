@@ -20,6 +20,7 @@ from Roll6.apps import signin, game
 
 urlpatterns = [
     path('', include('Roll6.apps.signin.urls')),
+    path('dashboard/', include('Roll6.apps.dashboard.urls')),
     path('game/', include('Roll6.apps.game.urls')),
     path('admin/', admin.site.urls),
 ]
