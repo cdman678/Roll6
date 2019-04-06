@@ -31,6 +31,8 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
+    'Roll6.apps.game',
+    'Roll6.apps.signin',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -54,9 +56,10 @@ ROOT_URLCONF = 'Roll6.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [os.path.join(BASE_DIR, "Roll6" , 'templates'),
+
+        'DIRS': [os.path.join(BASE_DIR, "Roll6", 'templates'),
                  os.path.join(BASE_DIR, 'Roll6', 'apps', 'signin', 'templates'),
-                 os.path.join(BASE_DIR, 'Roll6', 'apps', 'dashboard', 'templates'),
+                 os.path.join(BASE_DIR, 'Roll6', 'apps', 'game', 'templates')
                  ]
         ,
         'APP_DIRS': True,
