@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Roll6</title>
+    <meta charset="utf-8">
+    <!--Current scale, may need to change, but this makes the top bar look good -->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!--For Bootstrap-->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+
+    <style>
+        /* Color of Navbar */
+        .navbar {
+            background-color: #333;
+        }
+        /* Dropdown Button*/
+        .dropbtn {
+            background-color: #333;
+            color: white;
+            padding: 16px;
+            font-size: 16px;
+            border: none;
+        }
+        /* The container <div> - needed to position the dropdown content */
+        .dropdown {
+            position: relative;
+            display: inline-block;
+        }
+        /* Dropdown Content (Hidden by Default) */
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            background-color: #f1f1f1;
+            min-width: 160px;
+            box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+            z-index: 1;
+        }
+        /* Links inside the dropdown */
+        .dropdown-content a {
+            color: black;
+            padding: 12px 16px;
+            text-decoration: none;
+            display: block;
+        }
+        /* Change color of dropdown links on hover */
+        .dropdown-content a:hover {background-color: #ddd;}
+        /* Change color of dropdown links on hover */
+        .dropdown:hover .dropdown-content {display: block;}
+        /* Change the background color of the dropdown button when the dropdown content is shown */
+        .dropdown:hover .dropbtn {background-color: red;}
+
+
+    </style>
+
+</head>
+
+<body style="height:1500px">
+
+<!-- Navigation Bar -->
+<nav class="navbar navbar-inverse navbar-fixed-top">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <a class="navbar-brand" href="Home.html">Roll6</a>
+        </div>
+        <ul class="nav navbar-nav">
+            <ul class="nav navbar-nav">
+                <div class="dropdown">
+                    <button class="dropbtn">Hunter Games</button>
+                    <div class="dropdown-content">
+                        <li><a href="#"><span class="glyphicon glyphicon-plus"></span> New Game</a></li>
+                        <li><a href="Hunters.html"><span class="glyphicon glyphicon-folder-open"></span> Load Game</a></li>
+                        <li><a href="#"><span class="glyphicon glyphicon-play"></span> Active Game</a></li>
+                    </div>
+                </div>
+                <div class="dropdown">
+                    <button class="dropbtn">Keeper Games</button>
+                    <div class="dropdown-content">
+                        <li><a href="#"><span class="glyphicon glyphicon-plus"></span> New Game</a></li>
+                        <li><a href="Keepers.html"><span class="glyphicon glyphicon-folder-open"></span> Load Game</a></li>
+                        <li><a href="#"><span class="glyphicon glyphicon-play"></span> Active Game</a></li>
+                    </div>
+                </div>
+            </ul>
+            <div class="dropdown">
+                <button class="dropbtn">FAQ</button>
+                <div class="dropdown-content">
+                    <li><a href="MOTW.html">Monster of the Week</a></li>
+                    <li><a href="Roll6.html">Roll6</a></li>
+                </div>
+            </div>
+        </ul>
+        <ul class="nav navbar-nav navbar-right">
+            <div class="dropdown">
+                <button class="dropbtn">Options</button>
+                <div class="dropdown-content">
+                    <li><a href="#"><span class="glyphicon glyphicon-user"></span> Profile</a></li>
+                    <li><a href="#"><span class="glyphicon glyphicon-log-out"></span> Log Out</a></li>
+                </div>
+            </div>
+        </ul>
+    </div>
+</nav>
+
+<!-- Just a test -->
+<div id="content">
+    {% block content %}{% endblock %}
+</div>
+
+</body>
+
+</html>
+
