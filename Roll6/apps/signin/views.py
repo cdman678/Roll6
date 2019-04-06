@@ -1,6 +1,6 @@
 from django.template.loader import get_template
 from django.http import HttpResponse
-from django.shortcuts import render
+from django.shortcuts import render,redirect
 from .form import Login
 from django.contrib.auth import authenticate,login
 # Create your views here.
@@ -14,7 +14,7 @@ def index(request):
         if user is not None:
             if user.is_active:
                 login(request,user)
-                return render(request,'signin/signin.html')
+                return redirect("dashboard/")
 
 
     else:
