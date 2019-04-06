@@ -1,3 +1,5 @@
+<!--TODO: IMPORT BASE.HTML-->
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -51,6 +53,44 @@
         .dropdown:hover .dropbtn {background-color: red;}
 
 
+        /*Format for the character bar*/
+        /* Style the tab */
+        .tab {
+          overflow: hidden;
+          border: 1px solid #ccc;
+          background-color: #f1f1f1;
+        }
+
+        /* Style the buttons inside the tab */
+        .tab button {
+          background-color: inherit;
+          float: left;
+          border: none;
+          outline: none;
+          cursor: pointer;
+          padding: 14px 16px;
+          transition: 0.3s;
+          font-size: 16px;
+        }
+
+        /* Change background color of buttons on hover */
+        .tab button:hover {
+          background-color: #ddd;
+        }
+
+        /* Create an active/current tablink class */
+        .tab button.active {
+          background-color: #ccc;
+        }
+
+        /* Style the tab content */
+        .tabcontent {
+        display: none;
+        padding: 6px 12px;
+        border: 1px solid #ccc;
+        border-top: none;
+}
+
     </style>
 
 </head>
@@ -102,16 +142,92 @@
     </div>
 </nav>
 
+<!-- Character Bar-->
 <div style="padding-top:56px">
+<div class="tab">
+  <button class="tablinks" onclick="openCity(event, 'The Chosen')">The Chosen</button>
+  <button class="tablinks" onclick="openCity(event, 'The Crooked')">The Crooked</button>
+  <button class="tablinks" onclick="openCity(event, 'The Divine')">The Divine</button>
+  <button class="tablinks" onclick="openCity(event, 'The Expert')">The Expert</button>
+  <button class="tablinks" onclick="openCity(event, 'The Flake')">The Flake</button>
+  <button class="tablinks" onclick="openCity(event, 'The Initiate')">The Initiate</button>
+  <button class="tablinks" onclick="openCity(event, 'The Monstrous')">The Monstrous</button>
+  <button class="tablinks" onclick="openCity(event, 'The Mundane')">The Mundane</button>
+  <button class="tablinks" onclick="openCity(event, 'The Professional')">The Professional</button>
+  <button class="tablinks" onclick="openCity(event, 'The Spell-Slinger')">The Spell-Slinger</button>
+  <button class="tablinks" onclick="openCity(event, 'The Spooky')">The Spooky</button>
+  <button class="tablinks" onclick="openCity(event, 'The Wronged')">The Wronged</button>
 
-    <!-- Just a test -->
-    <div id="content">
-        {% block content %}{% endblock %}
-    </div>
+</div>
+
+<div id="The Chosen" class="tabcontent">
+TODO - Chosen
+</div>
+
+<div id="The Crooked" class="tabcontent">
+TODO - Crooked
+</div>
+
+<div id="The Divine" class="tabcontent">
+TODO - Divine
+</div>
+
+<div id="The Expert" class="tabcontent">
+TODO - Expert
+</div>
+
+<div id="The Flake" class="tabcontent">
+TODO - Flake
+</div>
+
+<div id="The Initiate" class="tabcontent">
+TODO - Initiate
+</div>
+
+<div id="The Monstrous" class="tabcontent">
+TODO - Monstrous
+</div>
+
+<div id="The Mundane" class="tabcontent">
+TODO - Mundane
+</div>
+
+<div id="The Professional" class="tabcontent">
+TODO - Professional
+</div>
+
+<div id="The Spell-Slinger" class="tabcontent">
+TODO - Spell-Slinger
+</div>
+
+<div id="The Spooky" class="tabcontent">
+TODO - Spooky
+</div>
+
+<div id="The Wronged" class="tabcontent">
+TODO - Wronged
+</div>
 
 </div>
 
 </body>
+
+<script>
+/*Character Bar*/
+function openCity(evt, cityName) {
+  var i, tabcontent, tablinks;
+  tabcontent = document.getElementsByClassName("tabcontent");
+  for (i = 0; i < tabcontent.length; i++) {
+    tabcontent[i].style.display = "none";
+  }
+  tablinks = document.getElementsByClassName("tablinks");
+  for (i = 0; i < tablinks.length; i++) {
+    tablinks[i].className = tablinks[i].className.replace(" active", "");
+  }
+  document.getElementById(cityName).style.display = "block";
+  evt.currentTarget.className += " active";
+}
+</script>
 
 </html>
 
