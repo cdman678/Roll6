@@ -1,5 +1,4 @@
 <!DOCTYPE html>
-{% load static %}
 <html lang="en">
 <head>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
@@ -16,6 +15,11 @@
                 {% csrf_token %}
                 {{ form.as_p }}
                 <button type="submit">Login</button>
+                {% if invalid %}
+                    <div class="alert alert-danger" role="alert">
+                    The account you are trying to log into does not exist or you have used an incorrect password.
+                    </div>
+                {% endif %}
             </form>
     </div>
     </div>
