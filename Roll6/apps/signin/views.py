@@ -19,5 +19,8 @@ def index(request):
         else:
             return render(request, 'signin/signin.html', {'form': form, 'invalid': True})
 
+    elif request.user.is_authenticated:
+        return redirect("dashboard/")
+    
     else:
         return HttpResponse(render(request,'signin/signin.html', {'form': form}))
