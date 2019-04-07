@@ -44,7 +44,7 @@
     .tabcontent {
       float: left;
       padding: 0px 12px;
-      border: 1px solid #ccc;
+      border: 1px #ccc;
       width: 70%;
       border-left: none;
       height: 300px;
@@ -54,20 +54,20 @@
 {% block content %}
 
 <!-- Character Bar-->
-<div style="padding-top:56px">
+<div>
 <div class="tab">
-  <button class="tablinks" onclick="openCity(event, 'The Chosen')">The Chosen</button>
-  <button class="tablinks" onclick="openCity(event, 'The Crooked')">The Crooked</button>
-  <button class="tablinks" onclick="openCity(event, 'The Divine')">The Divine</button>
-  <button class="tablinks" onclick="openCity(event, 'The Expert')">The Expert</button>
-  <button class="tablinks" onclick="openCity(event, 'The Flake')">The Flake</button>
-  <button class="tablinks" onclick="openCity(event, 'The Initiate')">The Initiate</button>
-  <button class="tablinks" onclick="openCity(event, 'The Monstrous')">The Monstrous</button>
-  <button class="tablinks" onclick="openCity(event, 'The Mundane')">The Mundane</button>
-  <button class="tablinks" onclick="openCity(event, 'The Professional')">The Professional</button>
-  <button class="tablinks" onclick="openCity(event, 'The Spell-Slinger')">The Spell-Slinger</button>
-  <button class="tablinks" onclick="openCity(event, 'The Spooky')">The Spooky</button>
-  <button class="tablinks" onclick="openCity(event, 'The Wronged')">The Wronged</button>
+  <button class="tablinks" onclick="opentab(event, 'The Chosen')">The Chosen</button>
+  <button class="tablinks" onclick="opentab(event, 'The Crooked')">The Crooked</button>
+  <button class="tablinks" onclick="opentab(event, 'The Divine')">The Divine</button>
+  <button class="tablinks" onclick="opentab(event, 'The Expert')">The Expert</button>
+  <button class="tablinks" onclick="opentab(event, 'The Flake')">The Flake</button>
+  <button class="tablinks" onclick="opentab(event, 'The Initiate')">The Initiate</button>
+  <button class="tablinks" onclick="opentab(event, 'The Monstrous')">The Monstrous</button>
+  <button class="tablinks" onclick="opentab(event, 'The Mundane')">The Mundane</button>
+  <button class="tablinks" onclick="opentab(event, 'The Professional')">The Professional</button>
+  <button class="tablinks" onclick="opentab(event, 'The Spell-Slinger')">The Spell-Slinger</button>
+  <button class="tablinks" onclick="opentab(event, 'The Spooky')">The Spooky</button>
+  <button class="tablinks" onclick="opentab(event, 'The Wronged')">The Wronged</button>
 
 </div>
 
@@ -125,18 +125,21 @@
 
 {% block script %}
 /*Character Bar*/
-function openCity(evt, cityName) {
-  var i, tabcontent, tablinks;
-  tabcontent = document.getElementsByClassName("tabcontent");
-  for (i = 0; i < tabcontent.length; i++) {
-    tabcontent[i].style.display = "none";
-  }
-  tablinks = document.getElementsByClassName("tablinks");
-  for (i = 0; i < tablinks.length; i++) {
-    tablinks[i].className = tablinks[i].className.replace(" active", "");
-  }
-  document.getElementById(cityName).style.display = "block";
-  evt.currentTarget.className += " active";
+function opentab(evt, tabName) {
+    var i, tabcontent, tablinks;
+    tabcontent = document.getElementsByClassName("tabcontent");
+    for (i = 0; i < tabcontent.length; i++) {
+        tabcontent[i].style.display = "none";
+    }
+    tablinks = document.getElementsByClassName("tablinks");
+    for (i = 0; i < tablinks.length; i++) {
+        tablinks[i].className = tablinks[i].className.replace(" active", "");
+    }
+    document.getElementById(tabName).style.display = "block";
+    evt.currentTarget.className += " active";
+
+    // Get the element with id="defaultOpen" and click on it
+    document.getElementById("defaultOpen").click();
 }
 {% endblock %}
 
