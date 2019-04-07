@@ -1,5 +1,5 @@
 <!--TODO: IMPORT BASE.HTML-->
-
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
 
@@ -101,7 +101,7 @@
 <nav class="navbar navbar-inverse navbar-fixed-top">
     <div class="container-fluid">
         <div class="navbar-header">
-            <a class="navbar-brand" href="Home.html">Roll6</a>
+            <a class="navbar-brand" href="/dashboard/">Roll6</a>
         </div>
         <ul class="nav navbar-nav">
             <ul class="nav navbar-nav">
@@ -161,7 +161,7 @@
 </div>
 
 <div id="The Chosen" class="tabcontent">
-TODO - Chosen
+    <img src="{% static "the_chosen.jpg" %}" alt="Cinque Terre" width="800" height="236">
 </div>
 
 <div id="The Crooked" class="tabcontent">
