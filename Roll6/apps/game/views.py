@@ -6,3 +6,7 @@ from django.http import HttpResponse
 def index(request):
     t = get_template('game/game.html')
     return HttpResponse(t.render())
+
+def choosecharacter(request):
+    temp = get_template('game/choosecharacter.html')
+    return HttpResponse(temp.render())
