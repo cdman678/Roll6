@@ -7,6 +7,7 @@ from django.contrib.auth import authenticate,login
 
 
 def index(request):
+    form = Login()
     if request.method == 'POST':
         username = request.POST['username']
         password = request.POST['password']
@@ -15,9 +16,8 @@ def index(request):
             if user.is_active:
                 login(request,user)
                 return redirect("dashboard/")
-
+        else:
+            return render(request, 'signin/signin.html', {'form': form, 'invalid': True})
 
     else:
-        form = Login()
-        t = get_template('signin/signin.html')
         return HttpResponse(render(request,'signin/signin.html', {'form': form}))
