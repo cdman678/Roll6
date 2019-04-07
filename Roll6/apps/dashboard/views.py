@@ -2,8 +2,8 @@ from django.template.loader import get_template
 from django.http import HttpResponse
 # Create your views here.
 
-def main_dash(request):
-    temp =get_template('maindash.html')
+def maindash(request):
+    temp =get_template('dashboard/maindash.html')
     return HttpResponse(temp.render())
 
 def motwfaq(request):
