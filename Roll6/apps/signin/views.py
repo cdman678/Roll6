@@ -27,7 +27,6 @@ def index(request):
 
 
 def signout(request):
-    form = Login()
     if request.user.is_authenticated:
         logout(request)
         return redirect("index")
