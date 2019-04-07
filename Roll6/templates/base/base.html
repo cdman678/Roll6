@@ -7,7 +7,10 @@
     <!--Current scale, may need to change, but this makes the top bar look good -->
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!--For Bootstrap-->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css" />
 
     <style>
 
@@ -34,7 +37,7 @@
                 display: none;
                 position: absolute;
                 background-color: #f1f1f1;
-                min-width: 160px;
+                min-width: 150px;
                 box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
                 z-index: 1;
             }
@@ -44,6 +47,11 @@
                 padding: 12px 16px;
                 text-decoration: none;
                 display: block;
+            }
+            img {
+                display: block;
+                margin-left: auto;
+                margin-right: auto;
             }
             /* Change color of dropdown links on hover */
             .dropdown-content a:hover {background-color: #ddd;}
@@ -60,16 +68,21 @@
 </head>
 
 {% block body_header %}
-<body style="height:1500px">
 {% endblock %}
 
 <!-- Navigation Bar -->
-<nav class="navbar navbar-inverse navbar-fixed-top">
+<nav class="navbar navbar-default navbar-fixed-top">
     <div class="container-fluid">
         <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
             <a class="navbar-brand" href="/dashboard/">Roll6</a>
         </div>
-        <ul class="nav navbar-nav">
+        <div class="collapse navbar-collapse" id="myNavbar">
             <ul class="nav navbar-nav">
                 <div class="dropdown">
                     <button class="dropbtn">Hunter Games</button>
@@ -79,6 +92,8 @@
                         <li><a href="#"><span class="glyphicon glyphicon-play"></span> Active Game</a></li>
                     </div>
                 </div>
+            </ul>
+            <ul class="nav navbar-nav">
                 <div class="dropdown">
                     <button class="dropbtn">Keeper Games</button>
                     <div class="dropdown-content">
@@ -88,23 +103,25 @@
                     </div>
                 </div>
             </ul>
-            <div class="dropdown">
-                <button class="dropbtn">FAQ</button>
-                <div class="dropdown-content">
-                    <li><a href="/dashboard/motwfaq/">Monster of the Week</a></li>
-                    <li><a href="/dashboard/roll6faq/">Roll6</a></li>
+            <ul class="nav navbar-nav">
+                <div class="dropdown">
+                    <button class="dropbtn">FAQ</button>
+                    <div class="dropdown-content">
+                        <li><a href="/dashboard/motwfaq/">Monster of the Week</a></li>
+                        <li><a href="/dashboard/roll6faq/">Roll6</a></li>
+                    </div>
                 </div>
-            </div>
-        </ul>
-        <ul class="nav navbar-nav navbar-right">
-            <div class="dropdown">
-                <button class="dropbtn">Options</button>
-                <div class="dropdown-content">
-                    <li><a href="#"><span class="glyphicon glyphicon-user"></span> Profile</a></li>
-                    <li><a href="/logout"><span class="glyphicon glyphicon-log-out"></span> Log Out</a></li>
+            </ul>
+            <ul class="nav navbar-nav navbar-right">
+                <div class="dropdown">
+                    <button class="dropbtn">Options</button>
+                    <div class="dropdown-content">
+                        <li><a href="#"><span class="glyphicon glyphicon-user"></span> Profile</a></li>
+                        <li><a href="/logout"><span class="glyphicon glyphicon-log-out"></span> Log Out</a></li>
+                    </div>
                 </div>
-            </div>
-        </ul>
+            </ul>
+        </div>
     </div>
 </nav>
 
@@ -118,8 +135,6 @@
     </div>
 
 </div>
-
-</body>
 
 <script>
 {% block script %}{% endblock %}
