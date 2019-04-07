@@ -56,9 +56,12 @@
         {% block extra_style %}{% endblock %}
     </style>
 
+
 </head>
 
+{% block body_header %}
 <body style="height:1500px">
+{% endblock %}
 
 <!-- Navigation Bar -->
 <nav class="navbar navbar-inverse navbar-fixed-top">
@@ -105,6 +108,8 @@
     </div>
 </nav>
 
+
+
 <div style="padding-top:56px">
 
     <!-- Just a test -->
@@ -116,10 +121,13 @@
 
 </body>
 
-</html>
-
-
 <script>
 {% block script %}{% endblock %}
 </script>
+
+</html>
+
+
+
+
 

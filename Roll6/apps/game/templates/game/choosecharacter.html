@@ -39,21 +39,16 @@
     .tab button.active {
       background-color: #ccc;
     }
+{% endblock %}
 
-    /* Style the tab content */
-    .tabcontent {
-      float: left;
-      padding: 0px 12px;
-      border: 1px #ccc;
-      width: 70%;
-      border-left: none;
-      height: 300px;
-    }
+{% block body_header %}
+<body style="height:1500px" onload="opentab(event, 'The Chosen')">
 {% endblock %}
 
 {% block content %}
 
 <!-- Character Bar-->
+<!-- TODO: when page is first loaded all tabs are displayed at the bottom of the page-->
 <div>
 <div class="tab">
   <button class="tablinks" onclick="opentab(event, 'The Chosen')">The Chosen</button>
@@ -68,10 +63,11 @@
   <button class="tablinks" onclick="opentab(event, 'The Spell-Slinger')">The Spell-Slinger</button>
   <button class="tablinks" onclick="opentab(event, 'The Spooky')">The Spooky</button>
   <button class="tablinks" onclick="opentab(event, 'The Wronged')">The Wronged</button>
-
 </div>
 
-<div id="The Chosen" class="tabcontent">
+
+
+<div id="The Chosen" class="tabcontent" >
     <img src="{% static "the_chosen.jpg" %}">
 </div>
 
@@ -80,43 +76,43 @@
 </div>
 
 <div id="The Divine" class="tabcontent">
-
+    <img src="{% static "the_divine.jpg" %}">
 </div>
 
 <div id="The Expert" class="tabcontent">
-
+    <img src="{% static "the_expert.jpg" %}">
 </div>
 
 <div id="The Flake" class="tabcontent">
-
+    <img src="{% static "the_flake.jpg" %}">
 </div>
 
 <div id="The Initiate" class="tabcontent">
-
+    <img src="{% static "the_initiate.jpg" %}">
 </div>
 
 <div id="The Monstrous" class="tabcontent">
-
+    <img src="{% static "the_monstrous.jpg" %}">
 </div>
 
 <div id="The Mundane" class="tabcontent">
-
+    <img src="{% static "the_mundane.jpg" %}">
 </div>
 
 <div id="The Professional" class="tabcontent">
-
+    <img src="{% static "the_professional.jpg" %}">
 </div>
 
 <div id="The Spell-Slinger" class="tabcontent">
-
+    <img src="{% static "the_spell_slinger.jpg" %}">
 </div>
 
 <div id="The Spooky" class="tabcontent">
-
+    <img src="{% static "the_spooky.jpg" %}">
 </div>
 
 <div id="The Wronged" class="tabcontent">
-
+    <img src="{% static "the_wronged.jpg" %}">
 </div>
 
 </div>
