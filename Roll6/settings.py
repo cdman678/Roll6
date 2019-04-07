@@ -128,7 +128,8 @@ USE_TZ = True
 STATIC_URL = '/static/'
 
 STATICFILES_DIRS = (
-    os.path.join(BASE_DIR, 'static'),
+    os.path.join(BASE_DIR, 'Roll6','static'),
+    os.path.join(BASE_DIR, 'Roll6','apps','static'),
 )
 
 LOGIN_REDIRECT_URL = '/'

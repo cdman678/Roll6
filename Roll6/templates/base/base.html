@@ -10,47 +10,50 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
 
     <style>
-        /* Color of Navbar */
-        .navbar {
-            background-color: #333;
-        }
-        /* Dropdown Button*/
-        .dropbtn {
-            background-color: #333;
-            color: white;
-            padding: 16px;
-            font-size: 16px;
-            border: none;
-        }
-        /* The container <div> - needed to position the dropdown content */
-        .dropdown {
-            position: relative;
-            display: inline-block;
-        }
-        /* Dropdown Content (Hidden by Default) */
-        .dropdown-content {
-            display: none;
-            position: absolute;
-            background-color: #f1f1f1;
-            min-width: 160px;
-            box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
-            z-index: 1;
-        }
-        /* Links inside the dropdown */
-        .dropdown-content a {
-            color: black;
-            padding: 12px 16px;
-            text-decoration: none;
-            display: block;
-        }
-        /* Change color of dropdown links on hover */
-        .dropdown-content a:hover {background-color: #ddd;}
-        /* Change color of dropdown links on hover */
-        .dropdown:hover .dropdown-content {display: block;}
-        /* Change the background color of the dropdown button when the dropdown content is shown */
-        .dropdown:hover .dropbtn {background-color: red;}
 
+        {% block nav %}
+            /* Color of Navbar */
+            .navbar {
+                background-color: #333;
+            }
+            /* Dropdown Button*/
+            .dropbtn {
+                background-color: #333;
+                color: white;
+                padding: 16px;
+                font-size: 16px;
+                border: none;
+            }
+            /* The container <div> - needed to position the dropdown content */
+            .dropdown {
+                position: relative;
+                display: inline-block;
+            }
+            /* Dropdown Content (Hidden by Default) */
+            .dropdown-content {
+                display: none;
+                position: absolute;
+                background-color: #f1f1f1;
+                min-width: 160px;
+                box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
+                z-index: 1;
+            }
+            /* Links inside the dropdown */
+            .dropdown-content a {
+                color: black;
+                padding: 12px 16px;
+                text-decoration: none;
+                display: block;
+            }
+            /* Change color of dropdown links on hover */
+            .dropdown-content a:hover {background-color: #ddd;}
+            /* Change color of dropdown links on hover */
+            .dropdown:hover .dropdown-content {display: block;}
+            /* Change the background color of the dropdown button when the dropdown content is shown */
+            .dropdown:hover .dropbtn {background-color: red;}
 
+        {% endblock %}
+        {% block extra_style %}{% endblock %}
     </style>
 
 </head>
@@ -68,7 +71,7 @@
                 <div class="dropdown">
                     <button class="dropbtn">Hunter Games</button>
                     <div class="dropdown-content">
-                        <li><a href="/dashboard/choosecharacter/"><span class="glyphicon glyphicon-plus"></span> New Game</a></li>
+                        <li><a href="/game/choosecharacter/"><span class="glyphicon glyphicon-plus"></span> join Game</a></li>
                         <li><a href="#"><span class="glyphicon glyphicon-folder-open"></span> Load Game</a></li>
                         <li><a href="#"><span class="glyphicon glyphicon-play"></span> Active Game</a></li>
                     </div>
@@ -114,4 +117,9 @@
 </body>
 
 </html>
+
+
+<script>
+{% block script %}{% endblock %}
+</script>
 

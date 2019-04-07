@@ -14,6 +14,4 @@ def roll6faq(request):
     temp = get_template('dashboard/roll6faq.html')
     return HttpResponse(temp.render())
 
-def choosecharacter(request):
-    temp = get_template('dashboard/choosecharacter.html')
-    return HttpResponse(temp.render())
+
