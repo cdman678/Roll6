@@ -10,9 +10,15 @@ class Game(models.Model):
     last_run_date = models.DateTimeField('date last run')
 
 
-class ActiveGames(models.Model):
-    game_ID = models.CharField(max_length=4,primary_key=True)
+class CharacterClasses(models.Model):
     char_class = models.CharField(max_length=20)
+
+    def __str__(self):
+        return self.char_class
+
+class ActiveGames(models.Model):
+    game_ID = models.ForeignKey(Game, on_delete=models.CASCADE)
+    char_class = models.ForeignKey(CharacterClasses, on_delete=models.CASCADE)
     char_name = models.CharField(max_length= 20)
     description = models.CharField(max_length=99999)
     charm = models.IntegerField()
@@ -26,6 +32,7 @@ class ActiveGames(models.Model):
 
     move_list = models.CharField(max_length=100)
     weapon_list = models.CharField(max_length=100)
+    history_list = models.CharField(max_length=100)
     improvements_list = models.CharField(max_length=100)
     advImprovements_list = models.CharField(max_length=100)
     char_specific = models.CharField(max_length=100)
@@ -36,14 +43,14 @@ class ActiveGames(models.Model):
 
 class Moves(models.Model):
     move_ID = models.IntegerField(primary_key=True)
-    char_type= models.CharField(max_length=20)
+    char_class = models.ForeignKey(CharacterClasses, on_delete=models.CASCADE)
     move_name = models.CharField(max_length=20)
     description = models.CharField(max_length=1000)
     default = models.BooleanField()
     mechanics = models.CharField(max_length=100)
 
     class Meta:
-        unique_together = (('move_ID','char_type'),)
+        unique_together = (('move_ID','char_class'),)
 
 
 class Gear(models.Model):
@@ -57,13 +64,13 @@ class Gear(models.Model):
 
 
 class AssignedGear(models.Model):
-    char_class = models.CharField(max_length=20,primary_key=True)
+    char_class = models.ForeignKey(CharacterClasses, on_delete=models.CASCADE)
     gear_ID = models.IntegerField()
 
 
 class Ratings(models.Model):
     rating_ID = models.IntegerField(primary_key=True)
-    char_class = models.CharField(max_length=20)
+    char_class = models.ForeignKey(CharacterClasses, on_delete=models.CASCADE)
     charm_modifier = models.IntegerField()
     cool_modifier = models.IntegerField()
     sharp_modifier = models.IntegerField()
@@ -76,7 +83,7 @@ class Ratings(models.Model):
 
 class Improvements(models.Model):
     improvement_ID = models.IntegerField(primary_key=True)
-    char_class = models.CharField(max_length=20)
+    char_class = models.ForeignKey(CharacterClasses, on_delete=models.CASCADE)
     text_improvement = models.CharField(max_length=20)
     charm_modifier = models.IntegerField()
     cool_modifier = models.IntegerField()
@@ -90,7 +97,7 @@ class Improvements(models.Model):
 
 class AdvImprovements(models.Model):
     improvement_ID = models.IntegerField(primary_key=True)
-    char_class = models.CharField(max_length=20)
+    char_class = models.ForeignKey(CharacterClasses, on_delete=models.CASCADE)
     improvement = models.CharField(max_length=100)
 
     class Meta:
