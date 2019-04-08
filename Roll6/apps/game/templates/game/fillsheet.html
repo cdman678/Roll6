@@ -1,15 +1,22 @@
 {% extends "base/base.html" %}
 
-{% block content %}
-    <div align="center">
-    <div>
-        <h1>{{ type }}</h1>
-        <p>
-            {% for move in move_list %}
-                {{move.description}}
-            {% endfor %}
-        </p>
-    </div>
-</div>
 
+{% block extra_style %}
+
+{% endblock %}
+
+
+
+{% block content %}
+
+<form>
+
+  <div class="form-check">
+    {% for move in move_list %}
+        <input type="checkbox" class="form-check-input" id="{{move.move_name}}">
+        <label class="form-check-label" for="exampleCheck1">{{move.move_name}} : {{move.description}}</label><br>
+    {% endfor %}
+  </div>
+
+</form>
 {% endblock %}
