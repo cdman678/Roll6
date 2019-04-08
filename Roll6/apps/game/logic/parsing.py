@@ -7,3 +7,12 @@ def string_to_list(string):
     if isinstance(string, str):
         out = string.split(',')
     return out
+
+
+def list_to_string(array):
+    out = ""
+    for string in array:
+        if out:
+            out += ','
+        out += string
+    return out
