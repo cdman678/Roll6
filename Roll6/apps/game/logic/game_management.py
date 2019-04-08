@@ -25,7 +25,7 @@ def generate_game_id():
     num = '1234567890'
     generated = ''
     for i in range(0,4):
-        generated = generated + random.choice([random.choice(num),random.choice(alpha)])
+        generated = generated + random.choice(num+alpha)
     return generated
 
 
