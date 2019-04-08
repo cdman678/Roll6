@@ -22,7 +22,7 @@ def get_adv_improvements(character_type=""):
 
 def generate_game_id():
     alpha = "abcdefghijklmnopqrstuvwxyz" + "abcdefghijklmnopqrstuvwxyz".upper()
-    num = '01234567890'
+    num = '1234567890'
     generated = ''
     for i in range(0,4):
         generated = generated + random.choice([random.choice(num),random.choice(alpha)])
