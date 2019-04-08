@@ -1,9 +1,15 @@
 {% extends "base/base.html" %}
 
 {% block content %}
-
-    {% for move in move_list %}
-        {{move.description}}<br>
-    {% endfor %}
+    <div align="center">
+    <div>
+        <h1>{{ type }}</h1>
+        <p>
+            {% for move in move_list %}
+                {{move.description}}
+            {% endfor %}
+        </p>
+    </div>
+</div>
 
 {% endblock %}
