@@ -35,7 +35,7 @@ class ActiveGames(models.Model):
 
 class Moves(models.Model):
     move_ID = models.IntegerField(primary_key=True)
-    char_type= models.CharField(max_length=20)
+    char_type = models.CharField(max_length=20)
     move_name = models.CharField(max_length=20)
     description = models.CharField(max_length=1000)
     default = models.BooleanField()
