@@ -1,5 +1,6 @@
-from Roll6.apps.game.models import *
 from django.db.models import Q
+
+from Roll6.apps.game.models import *
 
 
 def get_moves(character_type):
