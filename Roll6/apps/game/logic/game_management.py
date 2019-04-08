@@ -40,16 +40,16 @@ def generate_game_id():
     alpha = "abcdefghijklmnopqrstuvwxyz" + "abcdefghijklmnopqrstuvwxyz".upper()
     num = '1234567890'
     generated = ''
-    for i in range(0,4):
+    for i in range(0, 4):
         generated = generated + random.choice(num+alpha)
     return generated
 
 
-def create_new_game(game_name, keeper_name):
+def create_new_game(game_name, keeper_id):
     potential_id = generate_game_id()
     while potential_id in Game.objects.filter(Q(game_ID=potential_id)):
         potential_id = generate_game_id()
 
-    Game.objects.create(game_ID=potential_id,game_name=game_name, user_ID=keeper_name, keeper=True)
+    Game.objects.create(game_ID=potential_id, game_name=game_name, user_ID=keeper_id, keeper=True)
     return potential_id
 
