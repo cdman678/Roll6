@@ -28,6 +28,7 @@ class ActiveGames(models.Model):
     weapon_list = models.CharField(max_length=100)
     improvements_list = models.CharField(max_length=100)
     advImprovements_list = models.CharField(max_length=100)
+    char_specific = models.CharField(max_length=100)
 
     class Meta:
         unique_together = (('game_ID','char_class'),)
