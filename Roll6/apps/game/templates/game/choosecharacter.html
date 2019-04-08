@@ -46,22 +46,30 @@
     }
 
     /*button design*/
-    .button {
-        background-color: #ddd;
-        position: fixed
-        border: none;
-        color: black;
-        padding: 700px 500px;
-        text-align: center;
-        text-decoration: none;
-        display: inline-block;
-        margin: 4px 2px;
-        cursor: pointer;
-        border-radius: 16px;
+     .myBtn {
+      position: fixed;
+      bottom: 20px;
+      right: 30px;
+      z-index: 99;
+      font-size: 95%;
+      text-align: center;
+      border: none;
+      outline: none;
+      background-color: grey;
+      color: black;
+      cursor: pointer;
+      padding: 1%;
+      min-width: 50px;
+      min-height: 30px;
+      max-width: 70px;
+      max-height: 50px;
+      border-radius: 10px;
+      box-shadow: 2px 2px 3px #999;
     }
 
-    .button:hover {
-        background-color: #f1f1f1;
+    .myBtn:hover {
+      background-color: black;
+      color: white;
     }
 
 {% endblock %}
@@ -73,136 +81,136 @@
 {% block content %}
 <!-- Character Bar-->
 <div>
-<div class="tab" style="max-width:220px;width:25%;resize:both;overflow:auto">
-  <button class="tablinks" onclick="opentab(event, 'The Chosen')">The Chosen</button>
-  <button class="tablinks" onclick="opentab(event, 'The Crooked')">The Crooked</button>
-  <button class="tablinks" onclick="opentab(event, 'The Divine')">The Divine</button>
-  <button class="tablinks" onclick="opentab(event, 'The Expert')">The Expert</button>
-  <button class="tablinks" onclick="opentab(event, 'The Flake')">The Flake</button>
-  <button class="tablinks" onclick="opentab(event, 'The Initiate')">The Initiate</button>
-  <button class="tablinks" onclick="opentab(event, 'The Monstrous')">The Monstrous</button>
-  <button class="tablinks" onclick="opentab(event, 'The Mundane')">The Mundane</button>
-  <button class="tablinks" onclick="opentab(event, 'The Professional')">The Professional</button>
-  <button class="tablinks" onclick="opentab(event, 'The Spell-Slinger')">The Spell-Slinger</button>
-  <button class="tablinks" onclick="opentab(event, 'The Spooky')">The Spooky</button>
-  <button class="tablinks" onclick="opentab(event, 'The Wronged')">The Wronged</button>
-</div>
-
-
-
-<div id="The Chosen" class="tabcontent">
-    <img src="{% static "the_chosen.jpg" %}" style="padding-left: 20%;width:96%">
-    <div>
-       <a href="/game/fill/chosen" >
-          <button class="button">Select Class</button>
-       </a>
+    <div class="tab" style="max-width:220px;width:25%;resize:both;overflow:auto">
+      <button class="tablinks" onclick="opentab(event, 'The Chosen')">The Chosen</button>
+      <button class="tablinks" onclick="opentab(event, 'The Crooked')">The Crooked</button>
+      <button class="tablinks" onclick="opentab(event, 'The Divine')">The Divine</button>
+      <button class="tablinks" onclick="opentab(event, 'The Expert')">The Expert</button>
+      <button class="tablinks" onclick="opentab(event, 'The Flake')">The Flake</button>
+      <button class="tablinks" onclick="opentab(event, 'The Initiate')">The Initiate</button>
+      <button class="tablinks" onclick="opentab(event, 'The Monstrous')">The Monstrous</button>
+      <button class="tablinks" onclick="opentab(event, 'The Mundane')">The Mundane</button>
+      <button class="tablinks" onclick="opentab(event, 'The Professional')">The Professional</button>
+      <button class="tablinks" onclick="opentab(event, 'The Spell-Slinger')">The Spell-Slinger</button>
+      <button class="tablinks" onclick="opentab(event, 'The Spooky')">The Spooky</button>
+      <button class="tablinks" onclick="opentab(event, 'The Wronged')">The Wronged</button>
     </div>
-</div>
 
-<div id="The Crooked" class="tabcontent">
-    <img src="{% static "the_crooked.jpg" %}" style="padding-left: 20%;width:96%">
-    <div>
-       <a href="/game/fill/crooked" >
-          <button class="button">Select Class</button>
-       </a>
-    </div>
-</div>
 
-<div id="The Divine" class="tabcontent">
-    <img src="{% static "the_divine.jpg" %}" style="padding-left: 20%;width:96%">
-    <div>
-       <a href="/game/fill/divine" >
-          <button class="button">Select Class</button>
-       </a>
+    <div id="The Chosen" class="tabcontent">
+        <img src="{% static "the_chosen.jpg" %}" style="padding-left: 20%;width:96%">
+        <div>
+           <a href="/game/fill/chosen" >
+              <button class="myBtn" title="Select Chosen">Select</button>
+           </a>
+        </div>
     </div>
-</div>
 
-<div id="The Expert" class="tabcontent">
-    <img src="{% static "the_expert.jpg" %}" style="padding-left: 20%;width:96%">
-    <div>
-       <a href="/game/fill/expert" >
-          <button class="button">Select Class</button>
-       </a>
+    <div id="The Crooked" class="tabcontent">
+        <img src="{% static "the_crooked.jpg" %}" style="padding-left: 20%;width:96%">
+        <div>
+           <a href="/game/fill/crooked" >
+              <button class="myBtn" title="Select Chosen">Select</button>
+           </a>
+        </div>
     </div>
-</div>
 
-<div id="The Flake" class="tabcontent">
-    <img src="{% static "the_flake.jpg" %}" style="padding-left: 20%;width:96%">
-    <div>
-       <a href="/game/fill/flake" >
-          <button class="button">Select Class</button>
-       </a>
+    <div id="The Divine" class="tabcontent">
+        <img src="{% static "the_divine.jpg" %}" style="padding-left: 20%;width:96%">
+        <div>
+           <a href="/game/fill/divine" >
+              <button class="myBtn" title="Select Chosen">Select</button>
+           </a>
+        </div>
     </div>
-</div>
 
-<div id="The Initiate" class="tabcontent">
-    <img src="{% static "the_initiate.jpg" %}" style="padding-left: 20%;width:96%">
-    <div>
-       <a href="/game/fill/initiate" >
-          <button class="button">Select Class</button>
-       </a>
+    <div id="The Expert" class="tabcontent">
+        <img src="{% static "the_expert.jpg" %}" style="padding-left: 20%;width:96%">
+        <div>
+           <a href="/game/fill/expert" >
+              <button class="myBtn" title="Select Chosen">Select</button>
+           </a>
+        </div>
     </div>
-</div>
 
-<div id="The Monstrous" class="tabcontent">
-    <img src="{% static "the_monstrous.jpg" %}" style="padding-left: 20%;width:96%">
-    <div>
-       <a href="/game/fill/monstrous" >
-          <button class="button">Select Class</button>
-       </a>
+    <div id="The Flake" class="tabcontent">
+        <img src="{% static "the_flake.jpg" %}" style="padding-left: 20%;width:96%">
+        <div>
+           <a href="/game/fill/flake" >
+              <button class="myBtn" title="Select Chosen">Select</button>
+           </a>
+        </div>
     </div>
-</div>
 
-<div id="The Mundane" class="tabcontent">
-    <img src="{% static "the_mundane.jpg" %}" style="padding-left: 20%;width:96%">
-    <div>
-       <a href="/game/fill/mundane" >
-          <button class="button">Select Class</button>
-       </a>
+    <div id="The Initiate" class="tabcontent">
+        <img src="{% static "the_initiate.jpg" %}" style="padding-left: 20%;width:96%">
+        <div>
+           <a href="/game/fill/initiate" >
+              <button class="myBtn" title="Select Chosen">Select</button>
+           </a>
+        </div>
     </div>
-</div>
 
-<div id="The Professional" class="tabcontent">
-    <img src="{% static "the_professional.jpg" %}" style="padding-left: 20%;width:96%">
-    <div>
-       <a href="/game/fill/professional" >
-          <button class="button">Select Class</button>
-       </a>
+    <div id="The Monstrous" class="tabcontent">
+        <img src="{% static "the_monstrous.jpg" %}" style="padding-left: 20%;width:96%">
+        <div>
+           <a href="/game/fill/monstrous" >
+             <button class="myBtn" title="Select Chosen">Select</button>
+           </a>
+        </div>
     </div>
-</div>
 
-<div id="The Spell-Slinger" class="tabcontent">
-    <img src="{% static "the_spell_slinger.jpg" %}" style="padding-left: 20%;width:96%">
-    <div>
-       <a href="/game/fill/spellslinger" >
-          <button class="button">Select Class</button>
-       </a>
+    <div id="The Mundane" class="tabcontent">
+        <img src="{% static "the_mundane.jpg" %}" style="padding-left: 20%;width:96%">
+        <div>
+           <a href="/game/fill/mundane" >
+              <button class="myBtn" title="Select Chosen">Select</button>
+           </a>
+        </div>
     </div>
-</div>
 
-<div id="The Spooky" class="tabcontent">
-    <img src="{% static "the_spooky.jpg" %}" style="padding-left: 20%;width:96%">
-    <div>
-       <a href="/game/fill/spooky" >
-          <button class="button">Select Class</button>
-       </a>
+    <div id="The Professional" class="tabcontent">
+        <img src="{% static "the_professional.jpg" %}" style="padding-left: 20%;width:96%">
+        <div>
+           <a href="/game/fill/professional" >
+             <button class="myBtn" title="Select Chosen">Select</button>
+           </a>
+        </div>
     </div>
-</div>
 
-<div id="The Wronged" class="tabcontent">
-    <img src="{% static "the_wronged.jpg" %}" style="padding-left: 20%;width:96%">
-    <div>
-       <a href="/game/fill/wronged" >
-          <button class="button">Select Class</button>
-       </a>
+    <div id="The Spell-Slinger" class="tabcontent">
+        <img src="{% static "the_spell_slinger.jpg" %}" style="padding-left: 20%;width:96%">
+        <div>
+           <a href="/game/fill/spellslinger" >
+              <button class="myBtn" title="Select Chosen">Select</button>
+           </a>
+        </div>
     </div>
-</div>
+
+    <div id="The Spooky" class="tabcontent">
+        <img src="{% static "the_spooky.jpg" %}" style="padding-left: 20%;width:96%">
+        <div>
+           <a href="/game/fill/spooky" >
+              <button class="myBtn" title="Select Chosen">Select</button>
+           </a>
+        </div>
+    </div>
+
+    <div id="The Wronged" class="tabcontent">
+        <img src="{% static "the_wronged.jpg" %}" style="padding-left: 20%;width:96%">
+        <div>
+           <a href="/game/fill/wronged" >
+              <button class="myBtn" title="Select Chosen">Select</button>
+           </a>
+        </div>
+    </div>
 
 </div>
 {% endblock %}
 
 {% block script %}
 /*Character Bar*/
+
 function opentab(evt, tabName) {
     var i, tabcontent, tablinks;
     tabcontent = document.getElementsByClassName("tabcontent");
