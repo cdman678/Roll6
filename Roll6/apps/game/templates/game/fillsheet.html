@@ -6,14 +6,18 @@
 {% endblock %}
 
 
-
 {% block content %}
 
-  <div class="form-check">
+<div align="left" style="padding-left:10px">
+    <h1 style="text-transform:capitalize">{{ type }}</h1>
+  
     {% for move in move_list %}
-        <input type="checkbox" class="form-check-input" id="{{move.move_name}}">
-        <label class="form-check-label" for="exampleCheck1">{{move.move_name}} : {{move.description}}</label><br>
+    <div>
+        <p style="font:14px">
+            {{ move.move_name }} : {{ move.description }} , {{ move.mechanics }}
+        </p>
+    </div>
     {% endfor %}
-  </div>
+</div>
 
 {% endblock %}

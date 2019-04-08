@@ -58,7 +58,8 @@ TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
 
-        'DIRS': [os.path.join(BASE_DIR, "Roll6", 'templates'),
+        'DIRS': [os.path.join(BASE_DIR, 'templates'),
+                 os.path.join(BASE_DIR, "Roll6", 'templates'),
                  os.path.join(BASE_DIR, 'Roll6', 'apps', 'signin', 'templates'),
                  os.path.join(BASE_DIR, 'Roll6', 'apps', 'game', 'templates')
                  ]
