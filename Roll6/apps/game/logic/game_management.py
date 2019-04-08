@@ -24,3 +24,4 @@ def create_new_game(game_name, keeper_name):
 
     Game.objects.create(game_ID=potential_id,game_name=game_name, user_ID=keeper_name, keeper=True)
     return potential_id
+
