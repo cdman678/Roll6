@@ -7,14 +7,16 @@
 
 
 {% block content %}
-
-<div
+<form method="post">
+{% csrf_token %}
+<div>
     {% for move in move_list %}
     <div>
-            <input type="checkbox" class="form-check-input" id="{{move.move_name}}">
+            <input type="checkbox" class="form-check-input" name="m_{{move.move_ID}}">
             <label class="form-check-label" for="exampleCheck1">{{move.move_name}} : {{move.description}}</label><br>
     </div>
     {% endfor %}
+    <button type="submit">Submit</button>
 </div>
-
+</form>
 {% endblock %}

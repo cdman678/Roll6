@@ -16,8 +16,10 @@ def choosecharacter(request):
     return HttpResponse(temp.render())
 
 def fillsheet(request, hunter):
-
+    if request.method == 'POST':
+        print (request.POST)
+        return HttpResponse("Hello")
     #returns lists of rows
-    move_list = get_moves(hunter)
-
-    return render(request, 'game/fillsheet.html', {'type': hunter,'move_list': move_list})
+    else:
+        move_list = get_moves(hunter)
+        return render(request, 'game/fillsheet.html', {'type': hunter,'move_list': move_list})
