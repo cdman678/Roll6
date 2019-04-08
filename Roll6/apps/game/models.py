@@ -3,7 +3,7 @@ from django.db import models
 
 # Create your models here.
 class Game(models.Model):
-    game_ID = models.CharField(max_length=4,primary_key=True)
+    game_ID = models.CharField(max_length=4, primary_key=True)
     game_name = models.CharField(max_length=30)
     user_ID = models.CharField(max_length=20)
     keeper = models.BooleanField()
@@ -16,10 +16,11 @@ class CharacterClasses(models.Model):
     def __str__(self):
         return self.char_class
 
+
 class ActiveGames(models.Model):
     game_ID = models.ForeignKey(Game, on_delete=models.CASCADE)
     char_class = models.ForeignKey(CharacterClasses, on_delete=models.CASCADE)
-    char_name = models.CharField(max_length= 20)
+    char_name = models.CharField(max_length=20)
     description = models.CharField(max_length=99999)
     charm = models.IntegerField()
     cool = models.IntegerField()
@@ -38,7 +39,7 @@ class ActiveGames(models.Model):
     char_specific = models.CharField(max_length=100)
 
     class Meta:
-        unique_together = (('game_ID','char_class'),)
+        unique_together = (('game_ID', 'char_class'),)
 
 
 class Moves(models.Model):
@@ -50,7 +51,7 @@ class Moves(models.Model):
     mechanics = models.CharField(max_length=100)
 
     class Meta:
-        unique_together = (('move_ID','char_class'),)
+        unique_together = (('move_ID', 'char_class'),)
 
 
 class Gear(models.Model):
@@ -60,11 +61,12 @@ class Gear(models.Model):
     mechanic = models.CharField(max_length=100)
 
     def __str__(self):
-        return self.weapon_name.__str__() + " ID:"+ self.gear_ID.__str__()
+        return self.weapon_name.__str__() + " ID:" + self.gear_ID.__str__()
+
 
 class AssignedGear(models.Model):
     char_class = models.ForeignKey(CharacterClasses, on_delete=models.CASCADE)
-    gear_ID = models.ForeignKey(Gear,on_delete=models.CASCADE)
+    gear_ID = models.ForeignKey(Gear, on_delete=models.CASCADE)
 
     def __str__(self):
         temp = self.char_class.__str__() + " has gear: " + self.gear_ID.weapon_name.__str__()
@@ -81,7 +83,7 @@ class Ratings(models.Model):
     weird_modifier = models.IntegerField()
 
     class Meta:
-        unique_together = (('rating_ID','char_class'),)
+        unique_together = (('rating_ID', 'char_class'),)
 
 
 class Improvements(models.Model):
@@ -104,7 +106,7 @@ class AdvImprovements(models.Model):
     improvement = models.CharField(max_length=100)
 
     class Meta:
-        unique_together = (('improvement_ID','char_class'),)
+        unique_together = (('improvement_ID', 'char_class'),)
 
 
 class Fate(models.Model):
@@ -162,4 +164,3 @@ class Lost(models.Model):
     who = models.BooleanField()
     what = models.BooleanField()
     description = models.CharField(max_length=1000)
-
