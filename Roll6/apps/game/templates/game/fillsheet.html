@@ -1,9 +1,23 @@
 {% extends "base/base.html" %}
 
+
+{% block extra_style %}
+
+{% endblock %}
+
+
+
 {% block content %}
 
+<div align="left" style="padding-left:10px">
+    <h1 style="text-transform:capitalize">{{ type }}</h1>
     {% for move in move_list %}
-        {{move.description}}<br>
-    {% endfor %}
+    <div>
 
+        <p style="font:14px">
+            {{ move.move_name }} : {{ move.description }} , {{ move.mechanics }}
+        </p>
+    </div>
+    {% endfor %}
+</div>
 {% endblock %}
