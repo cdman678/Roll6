@@ -3,4 +3,4 @@ from django.db.models import Q
 
 
 def get_moves(character_type):
-    return Moves.objects.filter(Q(char_class=character_type))
+    return Moves.objects.filter(Q(char_class__char_class=character_type))
