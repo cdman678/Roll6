@@ -1,12 +1,12 @@
 {% extends "base/base.html" %}
 
 {% block content %}
-    <div align="center">
+    <div align="left" style="padding-left:10px">
     <div>
         <h1>{{ type }}</h1>
-        <p>
+        <p style="font:14px">
             {% for move in move_list %}
-                {{move.description}}
+                {{ move.move_name }} : {{ move.description }} , {{ move.mechanics }}
             {% endfor %}
         </p>
     </div>
