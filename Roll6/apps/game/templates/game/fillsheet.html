@@ -2,4 +2,9 @@
 
 {% block content %}
     {{ type}}
+
+    {% for move in move_list %}
+        {{move.description}}
+    {% endfor %}
+
 {% endblock %}
