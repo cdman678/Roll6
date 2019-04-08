@@ -19,5 +19,4 @@ def get_adv_improvements(character_type=""):
     return AdvImprovements.objects.filter(Q(char_class__char_class=character_type)) if character_type else AdvImprovements.objects.get()
 
 
-def create_new_game(game_name):
-    return
+
