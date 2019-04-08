@@ -14,7 +14,8 @@
     {% for move in move_list %}
     <div>
         <p style="font:14px">
-            {{ move.move_name }} : {{ move.description }} , {{ move.mechanics }}
+            <input type="checkbox" class="form-check-input" id="{{move.move_name}}">
+            <label class="form-check-label" for="exampleCheck1">{{move.move_name}} : {{move.description}}</label><br>
         </p>
     </div>
     {% endfor %}
