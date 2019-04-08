@@ -5,9 +5,9 @@ from django.db import models
 class Game(models.Model):
     game_ID = models.CharField(max_length=4,primary_key=True)
     game_name = models.CharField(max_length=30)
-    keeper = models.BooleanField
-    pub_date = models.DateTimeField('date published')
-    last_run_date = models.DateTimeField('date last run')
+    user_ID = models.CharField(max_length=20)
+    keeper = models.BooleanField()
+    pub_date = models.DateTimeField(auto_now_add=True)
 
 
 class CharacterClasses(models.Model):
@@ -42,7 +42,7 @@ class ActiveGames(models.Model):
 
 
 class Moves(models.Model):
-    move_ID = models.IntegerField(primary_key=True)
+    move_ID = models.AutoField(primary_key=True)
     char_class = models.ForeignKey(CharacterClasses, on_delete=models.CASCADE)
     move_name = models.CharField(max_length=20)
     description = models.CharField(max_length=1000)
@@ -54,22 +54,25 @@ class Moves(models.Model):
 
 
 class Gear(models.Model):
-    gear_ID = models.IntegerField(primary_key=True)
+    gear_ID = models.AutoField(primary_key=True)
     weapon_name = models.CharField(max_length=20)
     damage = models.IntegerField()
     mechanic = models.CharField(max_length=100)
 
-    class Meta:
-        unique_together = (('gear_ID','weapon_name'),)
-
+    def __str__(self):
+        return self.weapon_name.__str__() + " ID:"+ self.gear_ID.__str__()
 
 class AssignedGear(models.Model):
     char_class = models.ForeignKey(CharacterClasses, on_delete=models.CASCADE)
-    gear_ID = models.IntegerField()
+    gear_ID = models.ForeignKey(Gear,on_delete=models.CASCADE)
+
+    def __str__(self):
+        temp = self.char_class.__str__() + " has gear: " + self.gear_ID.weapon_name.__str__()
+        return temp
 
 
 class Ratings(models.Model):
-    rating_ID = models.IntegerField(primary_key=True)
+    rating_ID = models.AutoField(primary_key=True)
     char_class = models.ForeignKey(CharacterClasses, on_delete=models.CASCADE)
     charm_modifier = models.IntegerField()
     cool_modifier = models.IntegerField()
@@ -82,7 +85,7 @@ class Ratings(models.Model):
 
 
 class Improvements(models.Model):
-    improvement_ID = models.IntegerField(primary_key=True)
+    improvement_ID = models.AutoField(primary_key=True)
     char_class = models.ForeignKey(CharacterClasses, on_delete=models.CASCADE)
     text_improvement = models.CharField(max_length=20)
     charm_modifier = models.IntegerField()
@@ -96,7 +99,7 @@ class Improvements(models.Model):
 
 
 class AdvImprovements(models.Model):
-    improvement_ID = models.IntegerField(primary_key=True)
+    improvement_ID = models.AutoField(primary_key=True)
     char_class = models.ForeignKey(CharacterClasses, on_delete=models.CASCADE)
     improvement = models.CharField(max_length=100)
 
@@ -105,44 +108,44 @@ class AdvImprovements(models.Model):
 
 
 class Fate(models.Model):
-    fate_ID = models.IntegerField(primary_key=True)
+    fate_ID = models.AutoField(primary_key=True)
     heroic = models.BooleanField()
     doom = models.BooleanField()
     fate_tag = models.CharField(max_length=20)
 
 
 class Heat(models.Model):
-    heat_ID = models.IntegerField(primary_key=True)
+    heat_ID = models.AutoField(primary_key=True)
     heat_description = models.CharField(max_length=1000)
 
 
 class Underworld(models.Model):
-    underworld_ID = models.IntegerField(primary_key=True)
+    underworld_ID = models.AutoField(primary_key=True)
     underworld_description = models.CharField(max_length=1000)
 
 
 class Haven(models.Model):
-    haven_ID = models.IntegerField(primary_key=True)
+    haven_ID = models.AutoField(primary_key=True)
     name = models.CharField(max_length=20)
     description = models.CharField(max_length=1000)
 
 
 class Sect(models.Model):
-    sect_ID = models.IntegerField(primary_key=True)
+    sect_ID = models.AutoField(primary_key=True)
     good = models.BooleanField()
     bad = models.BooleanField()
     sect_tag = models.CharField(max_length=100)
 
 
 class Agency(models.Model):
-    agency_ID = models.IntegerField(primary_key=True)
+    agency_ID = models.AutoField(primary_key=True)
     resource = models.BooleanField()
     red_tape = models.BooleanField()
     option = models.CharField(max_length=20)
 
 
 class Spells(models.Model):
-    spell_ID = models.IntegerField(primary_key=True)
+    spell_ID = models.AutoField(primary_key=True)
     base = models.BooleanField()
     effect = models.BooleanField()
     spell_name = models.CharField(max_length=20)
@@ -150,12 +153,12 @@ class Spells(models.Model):
 
 
 class DarkSide(models.Model):
-    tag_ID = models.IntegerField(primary_key=True)
+    tag_ID = models.AutoField(primary_key=True)
     tag = models.CharField(max_length=20)
 
 
 class Lost(models.Model):
-    id = models.IntegerField(primary_key=True)
+    id = models.AutoField(primary_key=True)
     who = models.BooleanField()
     what = models.BooleanField()
     description = models.CharField(max_length=1000)
