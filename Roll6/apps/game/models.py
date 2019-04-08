@@ -3,7 +3,7 @@ from django.db import models
 
 # Create your models here.
 class Game(models.Model):
-    access_key = models.CharField(max_length=4,primary_key=True)
+    gameID = models.CharField(max_length=4,primary_key=True)
     game_name = models.CharField(max_length=30)
     keeper = models.BooleanField
     pub_date = models.DateTimeField('date published')
@@ -12,7 +12,7 @@ class Game(models.Model):
 
 class ActiveGames(models.Model):
     gameID = models.CharField(max_length=4,primary_key=True)
-    charclass = models.CharField(max_length=20)
+    charClass = models.CharField(max_length=20)
     charName = models.CharField(max_length= 20)
     description = models.CharField(max_length=99999)
     charm = models.IntegerField()
@@ -29,6 +29,9 @@ class ActiveGames(models.Model):
     improvementsList = models.CharField(max_length=100)
     advImprovementsList = models.CharField(max_length=100)
 
+    class Meta:
+        unique_together = (('gameID','charClass'),)
+
 
 class Moves(models.Model):
     moveid = models.IntegerField(primary_key=True)
@@ -44,12 +47,12 @@ class Moves(models.Model):
 
 class Gear(models.Model):
     gearID = models.IntegerField(primary_key=True)
-    weaponname = models.CharField(max_length=20)
+    weaponName = models.CharField(max_length=20)
     damage = models.IntegerField()
     mechanic = models.CharField(max_length=100)
 
     class Meta:
-        unique_together = (('gearID','weaponname'),)
+        unique_together = (('gearID','weaponName'),)
 
 
 class AssignedGear(models.Model):
@@ -59,18 +62,20 @@ class AssignedGear(models.Model):
 
 class Ratings(models.Model):
     ratingID = models.IntegerField(primary_key=True)
-    charclass = models.CharField(max_length=20)
+    charClass = models.CharField(max_length=20)
     charmModifier = models.IntegerField()
     coolModifier = models.IntegerField()
     sharpModifier = models.IntegerField()
     toughModifier = models.IntegerField()
     weirdModifier = models.IntegerField()
 
+    class Meta:
+        unique_together = (('ratingID','charClass'),)
 
 
 class Improvements(models.Model):
     improvementID = models.IntegerField(primary_key=True)
-    charclass = models.CharField(max_length=20)
+    charClass = models.CharField(max_length=20)
     textimprovement = models.CharField(max_length=20)
     charmModifier = models.IntegerField()
     coolModifier = models.IntegerField()
@@ -78,11 +83,17 @@ class Improvements(models.Model):
     toughModifier = models.IntegerField()
     weirdModifier = models.IntegerField()
 
+    class Meta:
+        unique_together = (('improvementID', 'charClass'),)
+
 
 class AdvImprovements(models.Model):
     improvementID = models.IntegerField(primary_key=True)
-    charclass = models.CharField(max_length=20)
+    charClass = models.CharField(max_length=20)
     improvement = models.CharField(max_length=100)
+
+    class Meta:
+        unique_together = (('improvementID','charClass'),)
 
 
 class Fate(models.Model):
