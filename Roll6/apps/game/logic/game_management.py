@@ -10,13 +10,6 @@ def get_moves(character_type=""):
 
 def get_gear(character_type=""):
     return AssignedGear.objects.filter(Q(char_class__char_class=character_type)) if character_type else AssignedGear.objects.get()
-def generate_game_id():
-    alpha = "abcdefghijklmnopqrstuvwxyz" + "abcdefghijklmnopqrstuvwxyz".upper()
-    num = '01234567890'
-    generated = ''
-    for i in range(0,4):
-        generated = generated + random.choice([random.choice(num),random.choice(alpha)])
-    return generated
 
 
 def get_improvements(character_type=""):
@@ -27,7 +20,13 @@ def get_adv_improvements(character_type=""):
     return AdvImprovements.objects.filter(Q(char_class__char_class=character_type)) if character_type else AdvImprovements.objects.get()
 
 
-
+def generate_game_id():
+    alpha = "abcdefghijklmnopqrstuvwxyz" + "abcdefghijklmnopqrstuvwxyz".upper()
+    num = '01234567890'
+    generated = ''
+    for i in range(0,4):
+        generated = generated + random.choice([random.choice(num),random.choice(alpha)])
+    return generated
 
 
 def create_new_game(game_name, keeper_name):
