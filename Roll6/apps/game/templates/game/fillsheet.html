@@ -8,11 +8,11 @@
 
 {% block content %}
 
-<div
+<div>
     {% for move in move_list %}
     <div>
             <input type="checkbox" class="form-check-input" id="{{move.move_name}}">
-            <label class="form-check-label" for="exampleCheck1">{{move.move_name}} : {{move.description}}</label><br>
+            <label class="form-check-label" for="{{move.move_name}}">{{move.move_name}} : {{move.description}}</label><br>
     </div>
     {% endfor %}
 </div>
