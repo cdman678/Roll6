@@ -1,6 +1,7 @@
 from django.shortcuts import *
 from django.template.loader import get_template
 
+from Roll6.apps.game.logic.character_verification import verify_new_character
 from Roll6.apps.game.logic.game_management import *
 from Roll6.apps.game.logic.parsing import parse_push
 
@@ -18,7 +19,20 @@ def choosecharacter(request):
 def fillsheet(request, hunter):
     if request.method == 'POST':
         parsed_list = parse_push(request.POST)
-        return HttpResponse("done")
+        logic_result = verify_new_character(hunter, parsed_list)
+        if len(logic_result) == 0:
+            return HttpResponse("no errors")
+        else:
+            move_list = get_moves(hunter)
+            gear_list = get_gear(hunter)
+            rating_list = get_ratings(hunter)
+            return render(request, 'game/fillsheet.html', {'type': hunter,
+                                                           'move_list': move_list,
+                                                           'gear_list': gear_list,
+                                                           'rating_list': rating_list,
+                                                           'error_list': logic_result,
+                                                           'invalid': True})
+
     else:
         move_list = get_moves(hunter)
         gear_list = get_gear(hunter)

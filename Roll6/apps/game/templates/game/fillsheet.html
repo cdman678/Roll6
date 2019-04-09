@@ -8,6 +8,14 @@
 <form method="post">
 {% csrf_token %}
 
+    {% if invalid %}
+        <div class="alert alert-danger" role="alert">
+            {% for error in error_list %}
+                {{error}}<br>
+            {% endfor %}
+        </div>
+    {% endif %}
+
     <h16>The {{type}}</h16>
 
     <!-- field for character name -->

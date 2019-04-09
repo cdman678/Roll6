@@ -14,8 +14,7 @@ def string_to_list(string):
 def parse_push(push_request):
     """
     :param push_request: *THIS WILL CHANGE* : name, moves, gear, ratings
-    :return: gameID, characterClass, name, description, charm, cool, sharp, tough, weird, luck, harm,
-             experience, moveList, weaponList, history, improvement, advImprovment, characterSpecific
+    :return: parsed versions of the parameters
     """
 
     #Remove the token from the list
@@ -53,14 +52,23 @@ def parse_push(push_request):
             else:
                 multiple_ratings = True
 
+    # Catch for multiple ratings
     if multiple_ratings == True:
         del rating
         rating = ""
 
-    print(username)
-    print(moves)
-    print(gear)
-    print(rating)
+    # converts list of list of strings to a list of strings
+    for i in range(0,len(moves)):
+        temp_m = moves[i][0]
+        moves[i] = temp_m
+
+    # converts list of list of strings to a list of strings
+    for i in range(0,len(gear)):
+        temp_g = gear[i][0]
+        gear[i] = temp_g
+
+    #This function will return more stuff as we add more to fillcharacter
+    return [username, moves, gear, rating]
 
 
 #Used for removing items in a dictionary
