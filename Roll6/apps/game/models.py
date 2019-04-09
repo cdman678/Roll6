@@ -3,14 +3,11 @@ from django.db import models
 
 # Create your models here.
 class Game(models.Model):
-    game_ID = models.CharField(max_length=4)
+    game_ID = models.CharField(max_length=4, primary_key=True)
     game_name = models.CharField(max_length=30)
     user_ID = models.CharField(max_length=20)
     keeper = models.BooleanField()
     pub_date = models.DateTimeField(auto_now_add=True)
-
-    class Meta:
-        unique_together = (('game_ID', 'user_ID'),)
 
 
 class CharacterClasses(models.Model):
@@ -24,7 +21,7 @@ class ActiveGames(models.Model):
     game_ID = models.ForeignKey(Game, on_delete=models.CASCADE)
     char_class = models.ForeignKey(CharacterClasses, on_delete=models.CASCADE)
     char_name = models.CharField(max_length=20)
-    description = models.CharField(max_length=10000)
+    description = models.CharField(max_length=99999)
     charm = models.IntegerField()
     cool = models.IntegerField()
     sharp = models.IntegerField()
