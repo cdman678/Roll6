@@ -10,11 +10,16 @@ def get_moves(character_type=""):
     return Moves.objects.filter(Q(char_class__char_class=character_type)) if character_type else Moves.objects.get()
 
 
+def get_all_gear():
+    return Gear.objects.get()
+
+
 def get_gear(character_type=""):
     return AssignedGear.objects.filter(Q(char_class__char_class=character_type)) if character_type else AssignedGear.objects.get()
 
-def get_gear_info(gear_ID):
-    return Gear.objects.filter(Q(gear_ID=gear_ID)if gear_ID else Gear.objects.get())
+
+def get_gear_info(gear_id=""):
+    return Gear.objects.filter(Q(gear_ID=gear_id) if gear_id else Gear.objects.get())
 
 
 def get_ratings(character_type=""):
@@ -28,27 +33,35 @@ def get_improvements(character_type=""):
 def get_adv_improvements(character_type=""):
     return AdvImprovements.objects.filter(Q(char_class__char_class=character_type)) if character_type else AdvImprovements.objects.get()
 
-def fix_id(old_ID ):
-    new_ID = re.findall("\d[0-9]*", old_ID)
-    return new_ID
 
+def fix_id(old_id):
+    new_id = re.findall("\d[0-9]*", old_id)
+    return new_id
+
+
+def get_keeper_games(user_id=""):
+    return Game.objects.filter(Q(user_ID=user_id, keeper=True)) if user_id else Game.objects.filter(Q(keeper=True))
+
+
+def get_hunter_games(user_id=""):
+    return Game.objects.filter(Q(user_ID=user_id, keeper=False)) if user_id else Game.objects.filter(Q(keeper=False))
 
 
 def generate_game_id():
     alpha = "abcdefghijklmnopqrstuvwxyz" + "abcdefghijklmnopqrstuvwxyz".upper()
     num = '1234567890'
     generated = ''
-    for i in range(0,4):
-        generated = generated + random.choice([random.choice(num),random.choice(alpha)])
+    for i in range(0, 4):
+        generated = generated + random.choice(num+alpha)
     return generated
 
 
-def create_new_game(game_name, keeper_name):
+def create_new_game(game_name, keeper_id):
     potential_id = generate_game_id()
     while potential_id in Game.objects.filter(Q(game_ID=potential_id)):
         potential_id = generate_game_id()
 
-    Game.objects.create(game_ID=potential_id,game_name=game_name, user_ID=keeper_name, keeper=True)
+    Game.objects.create(game_ID=potential_id, game_name=game_name, user_ID=keeper_id, keeper=True)
     return potential_id
 
 
