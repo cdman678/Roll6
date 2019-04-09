@@ -9,7 +9,7 @@ from Roll6.apps.game.logic.parsing import parse_push
 # Create your views here.
 
 def index(request):
-    t = get_template('game/game.html')
+    t = get_template('game/keeper.html')
     create_character('zzzz',"mundane","Jimmy","I have stuff here",0,0,0,0,0,0,0,0,"","","","","","")
     update_character('zzzz',"mundane","new stuff",0,0,0,0,0,0,0,0,"1,2,4,5","","","","","")
     return HttpResponse(t.render())
@@ -25,6 +25,14 @@ def join_game(request):
 
 def choosecharacter(request, gameid):
     return render(request, 'game/choosecharacter.html', {'gameID': gameid})
+
+
+def game(request, gameid):
+    keeper = get_game_by_id(gameid).keeper
+    if keeper:
+        return render(request, 'game/keeper.html', {'gameID': gameid})
+    else:
+        return render(request, 'game/hunter.html', {'gameID': gameid})
 
 
 def fillsheet(request, gameid, hunter):

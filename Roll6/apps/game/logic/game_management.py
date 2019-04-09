@@ -47,6 +47,10 @@ def get_hunter_games(user_id=""):
     return Game.objects.filter(Q(user_ID=user_id, keeper=False)) if user_id else Game.objects.filter(Q(keeper=False))
 
 
+def get_game_by_id(game_id=""):
+    return Game.objects.filter(Q(game_ID=game_id)).first()
+
+
 def generate_game_id():
     alpha = "abcdefghijklmnopqrstuvwxyz" + "abcdefghijklmnopqrstuvwxyz".upper()
     num = '1234567890'
