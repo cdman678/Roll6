@@ -67,7 +67,7 @@ def parse_push(push_request):
         temp_g = gear[i][0]
         gear[i] = temp_g
 
-    #This function will return more stuff as we add more to fillcharacter
+    #This function will return more stuff as we add more to fillcharacter sheet
     return [username, moves, gear, rating]
 
 
