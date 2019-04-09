@@ -1,9 +1,11 @@
 from django.contrib import admin
 from .models import *
 
+
 # Register your models here.
 admin.site.register(Game)
 admin.site.register(ActiveGames)
+admin.site.register(LinkHunter)
 admin.site.register(CharacterClasses)
 admin.site.register(Moves)
 admin.site.register(Gear)
