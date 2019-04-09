@@ -33,11 +33,9 @@ def get_improvements(character_type=""):
 def get_adv_improvements(character_type=""):
     return AdvImprovements.objects.filter(Q(char_class__char_class=character_type)) if character_type else AdvImprovements.objects.get()
 
-
-def fix_id(old_gear_id):
-    return_temp = re.findall("\d[0-9]*", old_gear_id)
-    if len(return_temp) == 1:
-        return return_temp[0]
+def fix_id(old_ID ):
+    new_ID = re.findall("\d[0-9]*", old_ID)
+    return new_ID
 
 
 def get_keeper_games(user_id=""):
@@ -64,3 +62,35 @@ def create_new_game(game_name, keeper_id):
 
     Game.objects.create(game_ID=potential_id, game_name=game_name, user_ID=keeper_id, keeper=True)
     return potential_id
+
+
+def get_class_id(charclassstring):
+    return CharacterClasses.objects.get(char_class=charclassstring).id
+
+
+def create_character(GameID,charclass,charname,description,charm,cool,sharp,tough,weird,luck,harm,experience,move_list,weapon_list,history_list,improvements_list,advImprovements_list,char_specific):
+    if ActiveGames.objects.filter(Q(game_ID=GameID) and Q(char_class_id=get_class_id(charclass))):
+        return False
+    else:
+        ActiveGames.objects.create(game_ID_id=GameID,char_class_id=get_class_id(charclass),char_name=charname,description=description,charm=charm,cool=cool,sharp=sharp,tough=tough,weird=weird,luck=luck,harm=harm,experience=experience,move_list=move_list,weapon_list=weapon_list,history_list=history_list,improvements_list=improvements_list,advImprovements_list=advImprovements_list,char_specific=char_specific)
+        return True
+
+
+def update_character(GameID,charclass,description,charm,cool,sharp,tough,weird,luck,harm,experience,move_list,weapon_list,history_list,improvements_list,advImprovements_list,char_specific):
+    obj = ActiveGames.objects.get(Q(game_ID=GameID) and Q(char_class_id=get_class_id(charclass)))
+    obj.description = description
+    obj.charm = charm
+    obj.cool = cool
+    obj.sharp = sharp
+    obj.tough = tough
+    obj.weird = weird
+    obj.luck = luck
+    obj.harm = harm
+    obj.experience = experience
+    obj.move_list = move_list
+    obj.weapon_list = weapon_list
+    obj.history_list = history_list
+    obj.improvements_list = improvements_list
+    obj.advImprovements_list = advImprovements_list
+    obj.char_specific = char_specific
+    obj.save()
