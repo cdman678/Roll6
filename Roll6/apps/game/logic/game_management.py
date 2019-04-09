@@ -17,8 +17,9 @@ def get_all_gear():
 def get_assigned_gear(character_type=""):
     return AssignedGear.objects.filter(Q(char_class__char_class=character_type)) if character_type else AssignedGear.objects.get()
 
-def get_gear_info(gear_ID):
-    return Gear.objects.filter(Q(gear_ID=gear_ID)if gear_ID else Gear.objects.get())
+
+def get_gear_info(gear_id=""):
+    return Gear.objects.filter(Q(gear_ID=gear_id) if gear_id else Gear.objects.get())
 
 
 def get_ratings(character_type=""):
@@ -32,15 +33,11 @@ def get_improvements(character_type=""):
 def get_adv_improvements(character_type=""):
     return AdvImprovements.objects.filter(Q(char_class__char_class=character_type)) if character_type else AdvImprovements.objects.get()
 
-def fix_id(old_gear_ID ):
-    return_temp = re.findall("\d[0-9]*", old_gear_ID)
+
+def fix_id(old_gear_id):
+    return_temp = re.findall("\d[0-9]*", old_gear_id)
     if len(return_temp) == 1:
         return return_temp[0]
-
-
-
-def get_ratings(character_type=""):
-    return Ratings.objects.filter(Q(char_class__char_class=character_type)) if character_type else Ratings.objects.get()
 
 
 def get_keeper_games(user_id=""):
@@ -67,4 +64,3 @@ def create_new_game(game_name, keeper_id):
 
     Game.objects.create(game_ID=potential_id, game_name=game_name, user_ID=keeper_id, keeper=True)
     return potential_id
-
