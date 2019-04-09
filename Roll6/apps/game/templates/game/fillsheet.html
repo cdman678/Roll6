@@ -1,22 +1,104 @@
-{% extends "base/base.html" %}
+{% extends "game/fillsheetMASTER.html" %}
 
 
-{% block extra_style %}
 
-{% endblock %}
+{% block content_f %}
 
-
-{% block content %}
+<!-- all inputs need to be in side of this form -->
 <form method="post">
 {% csrf_token %}
-<div>
-    {% for move in move_list %}
+
+    <h16>The {{type}}</h16>
+
+    <!-- field for character name -->
+    <div class="form-group">
+      <label for="usr">Your Name:</label>
+      <input type="text" class="form-control" id="usr" name="username">
+    </div>
+
+    <!-- todo: list out any pre-move selections -->
+
     <div>
-            <input type="checkbox" class="form-check-input" name="m_{{move.move_ID}}">
-            <label class="form-check-label" for="exampleCheck1">{{move.move_name}} : {{move.description}}</label><br>
+        <!-- explains how many moves they should get -->
+        <div>
+            {% if type in "chosen" %}
+                pick one of these:
+            {% elif type in "crooked-expert-monstrous-wronged" %}
+                choose two of these:
+            {% elif type in "divine-flake-initiate-mundane-spell-slinger-spooky-" %}
+                pick three of these:
+            {% elif type in "professional" %}
+                pick four of these:
+            {% endif %}
+        </div>
+
+        <!-- Loop to display moves -->
+        {% for move in move_list %}
+        <div>
+                <input type="checkbox" class="form-check-input" name="m_{{move}}">
+                <label class="form-check-label">{{move.move_name}} : {{move.description}}</label><br>
+        </div>
+        {% endfor %}
+    </div>
+
+    <!-- todo: list out any post-move selections -->
+
+    <!-- explains how much gear they get -->
+    <div>
+        {% if type == "chosen" %}
+            This class is dumb because they can make their own weapon
+        {% elif type == "crooked" %}
+            You can pick three of these effective weapons:
+        {% elif type == "divine" %}
+            You can pick one of these divine weapons:
+        {% elif type == "expert" %}
+            You can pick three of these monster-slaying weapons:
+        {% elif type == "flake" %}
+            This class is dumb because they get normal weapons and hidden weapons
+        {% elif type == "initiate" %}
+            This class is dumb because they get an old-fashioned and modern weapon
+        {% elif type == "monstrous" %}
+            If you want, you can take one handy weapon:
+        {% elif type == "mundane" %}
+            You can take two of the following weapons:
+        {% elif type == "professional" %}
+            This class is dumb because they get a serious weapon and a normal weapon:
+        {% elif type == "spell-slinger" %}
+            You don't need much - aside from any foci or consumables to power your magic.
+            Still, its good to carry some backup. Pick one:
+        {% elif type == "spooky" %}
+            You can have any magical items or amulets that you use to invoke your powers.
+            Additionally, you may take two of the following weapons:
+        {% elif type == "wronged" %}
+            This class is dumb because they get a 1 signature and 2 practical weapons
+        {% endif %}
+    </div>
+    <!-- Loop to display starting gun choices -->
+    {% for gear in gear_info %}
+    <div>
+            <input type="checkbox" class="form-check-input" name="g_{{gear}}">
+            <label class="form-check-label">{{ gear.weapon_name }},
+                                            Damage: {{ gear.damage }}-harm,
+                                            Tags: {{ gear.mechanic }}</label><br>
     </div>
     {% endfor %}
+
+    <!-- todo: list out transport -->
+
+    Ratings, pick one line:
+    <!-- Loop to display starting stats -->
+    {% for line in rating_list %}
+    <div>
+            <input type="checkbox" class="form-check-input" name="r_{{line}}">
+            <label class="form-check-label">Charm: {{ line.charm_modifier }},
+                                            Cool: {{ line.cool_modifier }},
+                                            Sharp: {{ line.sharp_modifier }},
+                                            Tough: {{ line.tough_modifier }},
+                                            Weird: {{ line.weird_modifier }}</label><br>
+    </div>
+    {% endfor %}
+
+    <!-- this submits all the information that they selected -->
     <button type="submit">Submit</button>
-</div>
 </form>
 {% endblock %}
