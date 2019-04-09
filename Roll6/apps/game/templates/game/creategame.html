@@ -8,7 +8,7 @@
         Please enter the name of your game: <br> <br>
         <div class="form-group">
             <label for="id">Game Name:</label>
-            <input name="gamename" maxlength="20" type="text">
+            <input id="id" name="gamename" maxlength="20" type="text">
         </div>
         <div class="form-group">
             <button type="submit" > Submit </button>
@@ -17,12 +17,12 @@
     {% endif %}
     
     {% if gameID %}
-        <img src="https://api.qrserver.com/v1/create-qr-code/?size=200x200&data={{ gameID }}">
+        <img src="https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=http://{{ request.get_host }}/game/{{ game.game_ID }}/game/" alt="http://{{ request.get_host }}/game/{{ game.game_ID }}/game/">
 
         <div align="center">
         <h1>Use this code to join the game</h1>
-        <h3> Game code: {{ gameID }} <h3>
-            <a href="/game/{{ gameID }}/keeper">
+        <h3> Game code: {{ gameID }} </h3>
+            <a href="http://{{ request.get_host }}/game/{{ game.game_ID }}/game/">
                 <button>Enter Your Keeper Panel</button>
             </a>
         </div>
