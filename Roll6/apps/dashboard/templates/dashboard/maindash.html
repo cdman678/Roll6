@@ -8,7 +8,7 @@
         <p>
            Welcome to the Roll6 dashboard!
         </p>
-
+        <div class="flex-container">
         <h3>Your Keeper Games:</h3>
         {% for game in keeper_games %}
             <a href="#">{{game.game_name}} (Started: {{game.pub_date}})</a><br>
@@ -24,6 +24,7 @@
         {% if not hunter_games %}
             You are not a Hunter in any games!<br />
         {% endif %}
+        </div>
     </div>
 </div>
 

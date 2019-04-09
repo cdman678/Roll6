@@ -18,7 +18,7 @@ def index(request):
 def create_game(request):
     if request.method == 'POST':
         gameName = request.POST["gamename"]
-        gameID = create_new_game(gameName,request.user)
+        gameID = create_new_game(gameName,request.user.id)
         return render(request,'game/creategame.html', {"gameID": gameID})
     return render(request, 'game/creategame.html')
 
