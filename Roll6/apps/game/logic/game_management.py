@@ -51,12 +51,12 @@ def get_ratings_values(hunter, rating_id):
 
     return return_list
 
-def get_keeper_games(user_id=""):
+def get_keeper_games(user_id=-1):
     return Game.objects.filter(Q(user_ID=user_id)) if user_id else Game.objects.filter(Q())
 
 
-def get_hunter_games(user_id=""):
-    return LinkHunter.objects.filter(Q(user_ID=user_id)) if user_id else Game.objects.filter(Q())
+def get_hunter_games(user_id=-1):
+    return LinkHunter.objects.filter(Q(user_ID=user_id)) if user_id else LinkHunter.objects.filter(Q())
 
 
 def get_game_by_id(game_id=""):
