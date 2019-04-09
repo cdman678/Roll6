@@ -8,6 +8,14 @@
 <form method="post">
 {% csrf_token %}
 
+    {% if invalid %}
+        <div class="alert alert-danger" role="alert">
+            {% for error in error_list %}
+                {{error}}<br>
+            {% endfor %}
+        </div>
+    {% endif %}
+
     <h16>The {{type}}</h16>
 
     <!-- field for character name -->
@@ -74,12 +82,12 @@
         {% endif %}
     </div>
     <!-- Loop to display starting gun choices -->
-    {% for gear in gear_info %}
+    {% for gear in gear_list %}
     <div>
-            <input type="checkbox" class="form-check-input" name="g_{{gear.gear_ID}}">
-            <label class="form-check-label">{{ gear.weapon_name }},
-                                            Damage: {{ gear.damage }}-harm,
-                                            Tags: {{ gear.mechanic }}</label><br>
+            <input type="checkbox" class="form-check-input" name="g_{{gear.gear_ID_id}}">
+            <label class="form-check-label">{{ gear.gear_ID.weapon_name }},
+                                            Damage: {{gear.gear_ID.damage }}-harm,
+                                            Tags: {{ gear.gear_ID.mechanic }}</label><br>
     </div>
     {% endfor %}
 
