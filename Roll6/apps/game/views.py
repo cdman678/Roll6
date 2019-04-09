@@ -5,6 +5,7 @@ from Roll6.apps.game.logic.character_verification import verify_new_character
 from Roll6.apps.game.logic.game_management import *
 from Roll6.apps.game.logic.parsing import list_to_string
 from Roll6.apps.game.logic.parsing import parse_push
+from Roll6.apps.game.logic.parsing import removekey
 
 
 # Create your views here.
@@ -33,6 +34,21 @@ def join_game(request):
 
 
 def choosecharacter(request, gameid):
+    if request.method == 'POST':
+        print(request.POST)
+        new_post = removekey(request.POST, "csrfmiddlewaretoken")
+        hunter_type = ""
+        for the_only in new_post:
+            hunter_type = the_only
+        print(hunter_type)
+        #If character sheet exists
+        if check_character(hunter_type, gameid) == True:
+            return HttpResponse("This character type exists")
+        else:
+            temp_string = '/game/'+str(gameid)+'/fill/'+hunter_type
+            return redirect(temp_string)
+
+        #Create a new character
     return render(request, 'game/choosecharacter.html', {'gameID': gameid})
 
 
