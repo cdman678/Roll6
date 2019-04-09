@@ -1,6 +1,8 @@
 {% extends 'base/base.html' %}
 
 {% block content %}
+{% if not gameID %}
+    <div align="center">
     <form method="post">
         {% csrf_token %}
         Please enter the name of your game: <br> <br>
@@ -12,4 +14,16 @@
             <button type="submit" > Submit </button>
         </div>
     </form>
+    {% endif %}
+    
+    {% if gameID %}
+
+        <img src="https://api.qrserver.com/v1/create-qr-code/?size=200x200&data={{ gameID }}">
+
+        <div align="center">
+        <h1>Use this code to join the game</h1>
+        <h3> Game code: {{ gameID }} <h3>
+        </div>
+        </div>
+    {% endif %}
 {% endblock %}

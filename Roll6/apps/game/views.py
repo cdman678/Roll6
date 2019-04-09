@@ -15,6 +15,16 @@ def index(request):
     return HttpResponse(t.render())
 
 
+def create_game(request):
+    if request.method == 'POST':
+        gameName = request.POST["gamename"]
+        temp_string = '/game/' + gameName + '/keeper/'
+        gameID = create_new_game(gameName,request.user)
+
+        return render(request,'game/creategame.html', {"gameID": gameID})
+    return render(request, 'game/creategame.html')
+
+
 def join_game(request):
     if request.method == 'POST':
         gameID = request.POST["gameid"]
