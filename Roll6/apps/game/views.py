@@ -42,7 +42,7 @@ def choosecharacter(request, gameid):
             hunter_type = the_only
         print(hunter_type)
         #If character sheet exists
-        if check_character(hunter_type, gameid) == True:
+        if check_character(hunter_type, gameid):
             return HttpResponse("This character type exists")
         else:
             temp_string = '/game/'+str(gameid)+'/fill/'+hunter_type

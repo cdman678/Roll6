@@ -84,16 +84,14 @@ def create_new_game(game_name, keeper_id):
 def get_class_id(charclassstring):
     return CharacterClasses.objects.get(char_class=charclassstring).id
 
+
 def check_character(charclass, GameID):
-    #if there is a character already it returns true
-    if ActiveGames.objects.filter(Q(game_ID=GameID,char_class_id=get_class_id(charclass))):
-        return True
-    else:
-        return False
+    # If there is a character already it returns the character, which evaluates as true. An empty list evaluates as false.
+    return ActiveGames.objects.filter(Q(game_ID__game_ID=GameID,char_class__char_class=charclass))
 
 
 def create_character(GameID,charclass,charname,description,charm,cool,sharp,tough,weird,luck,harm,experience,move_list,weapon_list,history_list,improvements_list,advImprovements_list,char_specific):
-    if ActiveGames.objects.filter(Q(game_ID=GameID,char_class_id=get_class_id(charclass))):
+    if ActiveGames.objects.filter(Q(game_ID__game_ID=GameID,char_class__char_class=charclass)):
         return False
     else:
         ActiveGames.objects.create(game_ID_id=GameID,char_class_id=get_class_id(charclass),char_name=charname,description=description,charm=charm,cool=cool,sharp=sharp,tough=tough,weird=weird,luck=luck,harm=harm,experience=experience,move_list=move_list,weapon_list=weapon_list,history_list=history_list,improvements_list=improvements_list,advImprovements_list=advImprovements_list,char_specific=char_specific)
@@ -101,7 +99,7 @@ def create_character(GameID,charclass,charname,description,charm,cool,sharp,toug
 
 
 def update_character(GameID,charclass,description,charm,cool,sharp,tough,weird,luck,harm,experience,move_list,weapon_list,history_list,improvements_list,advImprovements_list,char_specific):
-    obj = ActiveGames.objects.get(Q(game_ID=GameID,char_class_id=get_class_id(charclass)))
+    obj = ActiveGames.objects.get(Q(game_ID__game_ID=GameID,char_class__char_class=charclass)).first()
     obj.description = description
     obj.charm = charm
     obj.cool = cool
