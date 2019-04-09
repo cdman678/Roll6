@@ -24,9 +24,7 @@ def join_game(request):
 
 
 def choosecharacter(request, gameid):
-    print(gameid)
-    temp = get_template('game/choosecharacter.html')
-    return HttpResponse(temp.render())
+    return render(request, 'game/choosecharacter.html', {'gameID': gameid})
 
 
 def fillsheet(request, gameid, hunter):
