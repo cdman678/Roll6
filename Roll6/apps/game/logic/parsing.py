@@ -10,6 +10,7 @@ def string_to_list(string):
         out = string.split(',')
     return out
 
+
 # Will need changes as create character becomes developed - Caleb's work ATM
 def parse_push(push_request):
     """
@@ -17,8 +18,8 @@ def parse_push(push_request):
     :return: parsed versions of the parameters
     """
 
-    #Remove the token from the list
-    new_push_request = removekey(push_request,"csrfmiddlewaretoken")
+    # Remove the token from the list
+    new_push_request = removekey(push_request, "csrfmiddlewaretoken")
 
     username = ""
     moves = []
@@ -53,7 +54,7 @@ def parse_push(push_request):
                 multiple_ratings = True
 
     # Catch for multiple ratings
-    if multiple_ratings == True:
+    if multiple_ratings:
         del rating
         rating = ""
 
@@ -67,11 +68,11 @@ def parse_push(push_request):
         temp_g = gear[i][0]
         gear[i] = temp_g
 
-    #This function will return more stuff as we add more to fillcharacter sheet
+    # This function will return more stuff as we add more to fillcharacter sheet
     return [username, moves, gear, rating]
 
 
-#Used for removing items in a dictionary
+# Used for removing items in a dictionary
 def removekey(dictionary, key):
     r = dict(dictionary)
     del r[key]
