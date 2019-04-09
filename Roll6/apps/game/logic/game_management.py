@@ -52,11 +52,11 @@ def get_ratings_values(hunter, rating_id):
     return return_list
 
 def get_keeper_games(user_id=""):
-    return Game.objects.filter(Q(user_ID=user_id, keeper=True)) if user_id else Game.objects.filter(Q(keeper=True))
+    return Game.objects.filter(Q(user_ID=user_id)) if user_id else Game.objects.filter(Q())
 
 
 def get_hunter_games(user_id=""):
-    return Game.objects.filter(Q(user_ID=user_id, keeper=False)) if user_id else Game.objects.filter(Q(keeper=False))
+    return LinkHunter.objects.filter(Q(user_ID=user_id)) if user_id else Game.objects.filter(Q())
 
 
 def get_game_by_id(game_id=""):
@@ -77,7 +77,7 @@ def create_new_game(game_name, keeper_id):
     while potential_id in Game.objects.filter(Q(game_ID=potential_id)):
         potential_id = generate_game_id()
 
-    Game.objects.create(game_ID=potential_id, game_name=game_name, user_ID=keeper_id, keeper=True)
+    Game.objects.create(game_ID=potential_id, game_name=game_name, user_ID=keeper_id)
     return potential_id
 
 

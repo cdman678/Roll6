@@ -19,7 +19,7 @@
 
         <h3>Your Hunter Games:</h3>
         {% for game in hunter_games %}
-            <a href="#">{{game.game_name}} (Started: {{game.pub_date}})</a><br />
+            <a href="#">{{game.game_ID.game_name}} (Started: {{game.game_ID.pub_date}})</a><br />
         {% endfor %}
         {% if not hunter_games %}
             You are not a Hunter in any games!<br />

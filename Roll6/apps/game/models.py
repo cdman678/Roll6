@@ -6,7 +6,6 @@ class Game(models.Model):
     game_ID = models.CharField(max_length=4, primary_key=True)
     game_name = models.CharField(max_length=20)
     user_ID = models.IntegerField()
-    keeper = models.BooleanField()
     pub_date = models.DateTimeField(auto_now_add=True)
 
 
