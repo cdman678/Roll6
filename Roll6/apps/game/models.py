@@ -64,7 +64,7 @@ class Gear(models.Model):
 
 class AssignedGear(models.Model):
     char_class = models.ForeignKey(CharacterClasses, on_delete=models.CASCADE)
-    gear_ID = models.OneToOneField('game.Gear',on_delete=models.CASCADE)
+    gear_ID = models.ForeignKey(Gear, on_delete=models.CASCADE)
 
     def __str__(self):
         temp = self.char_class.__str__() + " has gear: " + self.gear_ID.weapon_name.__str__()
