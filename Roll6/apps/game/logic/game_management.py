@@ -69,6 +69,7 @@ def get_class_id(charclassstring):
     return CharacterClasses.objects.get(char_class=charclassstring).id
 
 def check_character():
+    #if there is a character already it returns true
     if ActiveGames.objects.filter(Q(game_ID=GameID) and Q(char_class_id=get_class_id(charclass))):
         return True
     else:
