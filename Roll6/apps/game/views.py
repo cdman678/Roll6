@@ -53,7 +53,7 @@ def choosecharacter(request, gameid):
 
 
 def game(request, gameid):
-    keeper = get_game_by_id(gameid).keeper
+    keeper = get_game_by_id(gameid).user_ID == request.user.id
     if keeper:
         return render(request, 'game/keeper.html', {'gameID': gameid})
     else:
