@@ -11,12 +11,12 @@
     {% if invalid %}
         <div class="alert alert-danger" role="alert">
             {% for error in error_list %}
-                {{error}}<br>
+                {{error}}<br />
             {% endfor %}
         </div>
     {% endif %}
 
-    <h16>The {{type}}</h16>
+    <h6>The {{type}}</h6>
 
     <!-- field for character name -->
     <div class="form-group">
@@ -43,8 +43,8 @@
         <!-- Loop to display moves -->
         {% for move in move_list %}
         <div>
-                <input type="checkbox" class="form-check-input" name="m_{{move}}">
-                <label class="form-check-label">{{move.move_name}} : {{move.description}}</label><br>
+                <input id="{{move.move_name}}" type="checkbox" class="form-check-input" name="m_{{move}}">
+                <label for="{{move.move_name}}" class="form-check-label">{{move.move_name}} : {{move.description}}</label><br />
         </div>
         {% endfor %}
     </div>
@@ -84,10 +84,10 @@
     <!-- Loop to display starting gun choices -->
     {% for gear in gear_list %}
     <div>
-            <input type="checkbox" class="form-check-input" name="g_{{gear.gear_ID_id}}">
-            <label class="form-check-label">{{ gear.gear_ID.weapon_name }},
+            <input type="checkbox" class="form-check-input" id="g_{{gear.gear_ID_id}}" name="g_{{gear.gear_ID_id}}">
+            <label for="g_{{gear.gear_ID_id}}" class="form-check-label">{{ gear.gear_ID.weapon_name }},
                                             Damage: {{gear.gear_ID.damage }}-harm,
-                                            Tags: {{ gear.gear_ID.mechanic }}</label><br>
+                                            Tags: {{ gear.gear_ID.mechanic }}</label><br />
     </div>
     {% endfor %}
 
@@ -97,12 +97,12 @@
     <!-- Loop to display starting stats -->
     {% for line in rating_list %}
     <div>
-            <input type="checkbox" class="form-check-input" name="r_{{line}}">
-            <label class="form-check-label">Charm: {{ line.charm_modifier }},
+            <input type="checkbox" class="form-check-input" id="r_{{line}}" name="r_{{line}}">
+            <label for="r_{{line}}" class="form-check-label">Charm: {{ line.charm_modifier }},
                                             Cool: {{ line.cool_modifier }},
                                             Sharp: {{ line.sharp_modifier }},
                                             Tough: {{ line.tough_modifier }},
-                                            Weird: {{ line.weird_modifier }}</label><br>
+                                            Weird: {{ line.weird_modifier }}</label><br />
     </div>
     {% endfor %}
 
