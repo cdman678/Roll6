@@ -76,7 +76,7 @@
     <!-- Loop to display starting gun choices -->
     {% for gear in gear_info %}
     <div>
-            <input type="checkbox" class="form-check-input" name="g_{{gear}}">
+            <input type="checkbox" class="form-check-input" name="g_{{gear.gear_ID}}">
             <label class="form-check-label">{{ gear.weapon_name }},
                                             Damage: {{ gear.damage }}-harm,
                                             Tags: {{ gear.mechanic }}</label><br>

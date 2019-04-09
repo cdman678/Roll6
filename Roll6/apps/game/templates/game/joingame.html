@@ -1,0 +1,23 @@
+{% extends 'base/base.html' %}
+
+{% block content %}
+<div class="d-flex justify-content-center" xmlns="http://www.w3.org/1999/html">
+    <div class="w-50 p-0" style="background-color: white; text-align: center">
+    <div class="shadow p-3 mb-5 bg-white rounded">
+
+        <form method="post">
+            {% csrf_token %}
+            Enter Party Number: <br> <br>
+            <div class="form-group">
+                <label for="id">Code:</label>
+                <input name="gameid" maxlength="4" type="text">
+            </div>
+            <div class="form-group">
+                <button type="submit" > Submit </button>
+            </div>
+    </form>
+
+    </div>
+    </div>
+</div>
+{% endblock %}

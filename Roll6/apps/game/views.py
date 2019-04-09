@@ -8,17 +8,31 @@ from Roll6.apps.game.logic.game_management import *
 
 def index(request):
     t = get_template('game/game.html')
+    create_character('zzzz',"mundane","Jimmy","I have stuff here",0,0,0,0,0,0,0,0,"","","","","","")
+    update_character('zzzz',"mundane","new stuff",0,0,0,0,0,0,0,0,"1,2,4,5","","","","","")
     return HttpResponse(t.render())
 
-def choosecharacter(request):
+
+def join_game(request):
+    if request.method == 'POST':
+        gameID = request.POST["gameid"]
+        temp_string = '/game/'+gameID+'/choosecharacter/'
+        return redirect(temp_string)
+    return render(request,'game/joingame.html')
+
+
+def choosecharacter(request, gameid):
+    print(gameid)
     temp = get_template('game/choosecharacter.html')
     return HttpResponse(temp.render())
 
-def fillsheet(request, hunter):
+
+def fillsheet(request, gameid, hunter):
     if request.method == 'POST':
         print (request.POST)
         return HttpResponse("Hello")
     else:
+        gameid = gameid
         move_list = get_moves(hunter)
         avaliable_gear_list = get_gear(hunter)
         gear_temp = []
