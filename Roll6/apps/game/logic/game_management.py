@@ -38,6 +38,18 @@ def fix_id(old_id):
     new_id = re.findall("\d[0-9]*", old_id)
     return new_id
 
+def get_ratings_values(hunter, rating_id):
+    return_list = []
+    all_ratings = get_ratings(hunter)
+    for rating in all_ratings:
+        if (int(rating.rating_ID) == int(rating_id)):
+            return_list.append(rating.charm_modifier)
+            return_list.append(rating.cool_modifier)
+            return_list.append(rating.sharp_modifier)
+            return_list.append(rating.tough_modifier)
+            return_list.append(rating.weird_modifier)
+
+    return return_list
 
 def get_keeper_games(user_id=""):
     return Game.objects.filter(Q(user_ID=user_id, keeper=True)) if user_id else Game.objects.filter(Q(keeper=True))

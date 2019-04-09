@@ -1,19 +1,12 @@
 from django.shortcuts import *
-from django.template.loader import get_template
 
 from Roll6.apps.game.logic.character_verification import verify_new_character
 from Roll6.apps.game.logic.game_management import *
+from Roll6.apps.game.logic.parsing import list_to_string
 from Roll6.apps.game.logic.parsing import parse_push
 
 
 # Create your views here.
-
-def index(request):
-    t = get_template('game/game.html')
-    create_character('zzzz',"mundane","Jimmy","I have stuff here",0,0,0,0,0,0,0,0,"","","","","","")
-    update_character('zzzz',"mundane","new stuff",0,0,0,0,0,0,0,0,"1,2,4,5","","","","","")
-    return HttpResponse(t.render())
-
 
 def join_game(request):
     if request.method == 'POST':
@@ -32,6 +25,8 @@ def fillsheet(request, gameid, hunter):
         parsed_list = parse_push(request.POST)
         logic_result = verify_new_character(hunter, parsed_list)
         if len(logic_result) == 0:
+            rating_values = get_ratings_values(hunter, parsed_list[3])
+            create_character(str(gameid),hunter,parsed_list[0],"",rating_values[0],rating_values[1],rating_values[2],rating_values[3],rating_values[4],7,0,0,list_to_string(parsed_list[1]),list_to_string(parsed_list[2]),"","","","")
             return HttpResponse("no errors")
         else:
             move_list = get_moves(hunter)
@@ -45,7 +40,6 @@ def fillsheet(request, gameid, hunter):
                                                            'invalid': True})
 
     else:
-        gameid = gameid
         move_list = get_moves(hunter)
         gear_list = get_gear(hunter)
         rating_list = get_ratings(hunter)

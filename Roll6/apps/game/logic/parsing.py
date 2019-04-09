@@ -1,5 +1,15 @@
 from Roll6.apps.game.logic.game_management import fix_id
 
+def list_to_string(list):
+    return_string = ""
+    for string in list:
+        if len(return_string) == 0:
+            return_string = string
+        else:
+            return_string = return_string +","+string
+
+    return return_string
+
 def string_to_list(string):
     """
     :param string: The string to split, should be a comma separated list
