@@ -1,4 +1,5 @@
 from django.shortcuts import *
+from django.template.loader import get_template
 
 from Roll6.apps.game.logic.character_verification import verify_new_character
 from Roll6.apps.game.logic.game_management import *
@@ -7,6 +8,23 @@ from Roll6.apps.game.logic.parsing import parse_push
 
 
 # Create your views here.
+
+def index(request):
+    t = get_template('game/game.html')
+    create_character('zzzz',"mundane","Jimmy","I have stuff here",0,0,0,0,0,0,0,0,"","","","","","")
+    update_character('zzzz',"mundane","new stuff",0,0,0,0,0,0,0,0,"1,2,4,5","","","","","")
+    return HttpResponse(t.render())
+
+
+def create_game(request):
+    if request.method == 'POST':
+        gameName = request.POST["gamename"]
+        temp_string = '/game/' + gameName + '/keeper/'
+        gameID = create_new_game(gameName,request.user)
+
+        return render(request,'game/creategame.html', {"gameID": gameID})
+    return render(request, 'game/creategame.html')
+
 
 def join_game(request):
     if request.method == 'POST':

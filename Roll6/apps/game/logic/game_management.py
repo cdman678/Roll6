@@ -80,6 +80,13 @@ def create_new_game(game_name, keeper_id):
 def get_class_id(charclassstring):
     return CharacterClasses.objects.get(char_class=charclassstring).id
 
+def check_character():
+    #if there is a character already it returns true
+    if ActiveGames.objects.filter(Q(game_ID=GameID) and Q(char_class_id=get_class_id(charclass))):
+        return True
+    else:
+        return False
+
 
 def create_character(GameID,charclass,charname,description,charm,cool,sharp,tough,weird,luck,harm,experience,move_list,weapon_list,history_list,improvements_list,advImprovements_list,char_specific):
     if ActiveGames.objects.filter(Q(game_ID=GameID) and Q(char_class_id=get_class_id(charclass))):
