@@ -1,4 +1,5 @@
 import random
+from Roll6.apps.game.logic.parsing import string_to_list
 import re
 
 from django.db.models import Q
@@ -10,12 +11,26 @@ def get_moves(character_type=""):
     return Moves.objects.filter(Q(char_class__char_class=character_type)) if character_type else Moves.objects.get()
 
 
+def get_move(move_ID = None):
+    return Moves.objects.get(move_ID=move_ID)
+
+def get_char_classes_list():
+    list = []
+    obj = CharacterClasses.objects.all()
+    for char in obj:
+        list.append(char.char_class)
+    return list
+
 def get_all_gear():
     return Gear.objects.get()
 
 
 def get_gear(character_type=""):
     return AssignedGear.objects.filter(Q(char_class__char_class=character_type)) if character_type else AssignedGear.objects.get()
+
+
+def get_weapon(weapon_ID = None):
+    return Gear.objects.get(gear_ID=weapon_ID)
 
 
 def get_gear_info(gear_id=""):
@@ -30,13 +45,17 @@ def get_improvements(character_type=""):
     return Improvements.objects.filter(Q(char_class__char_class=character_type)) if character_type else Improvements.objects.get()
 
 
+def get_improvement(improvement_ID=None):
+    return Improvements.objects.get(improvement_ID=improvement_ID)
+
+
 def get_adv_improvements(character_type=""):
     return AdvImprovements.objects.filter(Q(char_class__char_class=character_type)) if character_type else AdvImprovements.objects.get()
 
 
-def fix_id(old_id):
-    new_id = re.findall("\d[0-9]*", old_id)
-    return new_id
+def get_adv_improvement(improvement_ID=None):
+    return AdvImprovements.objects.get(improvement_ID=improvement_ID)
+
 
 def get_ratings_values(hunter, rating_id):
     return_list = []
@@ -51,8 +70,38 @@ def get_ratings_values(hunter, rating_id):
 
     return return_list
 
+
 def get_keeper_games(user_id=""):
     return Game.objects.filter(Q(user_ID=user_id)) if user_id else Game.objects.filter(Q())
+
+
+def get_hunter_info(game_id="",hunter= ""):
+    return ActiveGames.objects.get(Q(game_ID=game_id,char_class__char_class=hunter))
+
+def generate_hunter_data(game_ID="", hunter=""):
+    obj = ActiveGames.objects.get(Q(game_ID__game_ID=game_ID, char_class__char_class=hunter))
+    moves = string_to_list(obj.move_list)
+    weapons = string_to_list(obj.weapon_list)
+    improvements = string_to_list(obj.improvements_list)
+    advimprovements = string_to_list(obj.advImprovements_list)
+
+    moveobjs = []
+    for move in moves:
+        moveobjs.append(get_move(move))
+
+    weaponobjs = []
+    for weapon in weapons:
+        weaponobjs.append(get_weapon(weapon))
+
+    improvementobjs = []
+    for improvement in improvements:
+        improvementobjs.append(get_improvement(improvement))
+
+    advimprovementobjs = []
+    for advimprovement in advimprovements:
+        advimprovementobjs.append(advimprovement)
+
+    return moveobjs, weaponobjs, improvementobjs, advimprovementobjs
 
 
 def get_hunter_games(user_id=""):
