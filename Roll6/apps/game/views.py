@@ -1,10 +1,11 @@
 from django.shortcuts import *
 from django.template.loader import get_template
+import django.core.exceptions
 
 from Roll6.apps.game.logic.character_verification import verify_new_character
 from Roll6.apps.game.logic.game_management import *
 from Roll6.apps.game.logic.parsing import list_to_string
-from Roll6.apps.game.logic.parsing import parse_push
+from Roll6.apps.game.logic.parsing import parse_push, string_to_list
 from Roll6.apps.game.logic.parsing import removekey
 
 
@@ -12,8 +13,8 @@ from Roll6.apps.game.logic.parsing import removekey
 
 def index(request):
     t = get_template('game/keeper.html')
-    create_character('zzzz',"mundane","Jimmy","I have stuff here",0,0,0,0,0,0,0,0,"","","","","","")
-    update_character('zzzz',"mundane","new stuff",0,0,0,0,0,0,0,0,"1,2,4,5","","","","","")
+    create_character('S6LW','mundane',"Jimmy","I have stuff here",0,0,0,0,0,0,0,0,"","","","","","")
+    update_character('S6LW',"mundane","new stuff",0,0,0,0,0,0,0,0,"1,2,4,5","","","","","")
     return HttpResponse(t.render())
 
 
@@ -52,13 +53,24 @@ def choosecharacter(request, gameid):
     return render(request, 'game/choosecharacter.html', {'gameID': gameid})
 
 
-def game(request, gameid):
-    keeper = get_game_by_id(gameid).user_ID == request.user.id
-    if keeper:
+def game(request, gameid, hunter):
+    keeper = get_game_by_id(gameid)
+    if keeper.user_ID == request.user.id:
         return render(request, 'game/keeper.html', {'gameID': gameid})
+    #you are a hunter
     else:
-        return render(request, 'game/hunter.html', {'gameID': gameid})
-
+        if hunter in get_char_classes_list():
+            hunterobj = get_hunter_info(gameid, hunter)
+            moves, weapons, improvements, advimprovements = generate_hunter_data(gameid, hunter)
+            return render(request, 'game/hunter.html', {'gameID': gameid,
+                                                        'hunter': hunterobj,
+                                                        'moves': moves,
+                                                        'weapons': weapons,
+                                                        'improvements': improvements,
+                                                        'advimprovements': advimprovements})
+        else:
+            temp_string = "/game" + gameid + '/choosecharacter'
+            return HttpResponseRedirect("/game/" + gameid + '/choosecharacter')
 
 def fillsheet(request, gameid, hunter):
     if request.method == 'POST':

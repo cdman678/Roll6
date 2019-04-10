@@ -1,5 +1,17 @@
 {% extends "base/base.html" %}
 
 {% block content %}
-    You are a hunter in this game!
+    your moves fucker: <br>
+    {% for move in moves  %}
+        <div> {{move.move_name}} : {{ move.description }}</div>
+    {% endfor %}
+
+    {% for weapon in weapons %}
+        <div>Name: {{ weapon.weapon_name }} | Damage: {{ weapon.damage }}</div>
+    {% endfor %}
+
+    {% for improvement in improvements %}
+        <div> Improvement: {{ improvement.text_improvement }}</div>
+    {% endfor %}
+
 {% endblock %}

@@ -1,4 +1,7 @@
-from Roll6.apps.game.logic.game_management import fix_id
+def fix_id(old_id):
+    new_id = re.findall("\d[0-9]*", old_id)
+    return new_id
+
 
 def list_to_string(list):
     return_string = ""
