@@ -1,0 +1,12 @@
+<!DOCTYPE html>
+{% load static %}
+<html>
+<body>
+{% if rollmath == 2 %}
+    <img src="{% static 'fucked.gif'%}" width="300" height="300" align="left">
+{% endif %}
+
+<h3>You rolled: {{ rolls.0 }} and {{ rolls.1 }} for a total of {{ rollmath }}</h3>
+
+</body>
+</html>

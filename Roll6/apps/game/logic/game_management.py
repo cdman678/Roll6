@@ -1,8 +1,7 @@
 import random
 from Roll6.apps.game.logic.parsing import string_to_list
-
 from django.db.models import Q
-
+from django.core import exceptions
 from Roll6.apps.game.models import *
 
 
@@ -75,7 +74,10 @@ def get_keeper_games(user_id=""):
 
 
 def get_hunter_info(game_id="",hunter= ""):
-    return ActiveGames.objects.get(Q(game_ID=game_id,char_class__char_class=hunter))
+    try:
+        return ActiveGames.objects.get(Q(game_ID=game_id,char_class__char_class=hunter))
+    except exceptions.ObjectDoesNotExist:
+        return None
 
 def generate_hunter_data(game_ID="", hunter=""):
     obj = ActiveGames.objects.get(Q(game_ID__game_ID=game_ID, char_class__char_class=hunter))
@@ -93,12 +95,18 @@ def generate_hunter_data(game_ID="", hunter=""):
         weaponobjs.append(get_weapon(weapon))
 
     improvementobjs = []
-    for improvement in improvements:
-        improvementobjs.append(get_improvement(improvement))
+    if improvements is not False:
+        for improvement in improvements:
+            improvementobjs.append(get_improvement(improvement))
+    else:
+        improvementobjs = False
 
     advimprovementobjs = []
-    for advimprovement in advimprovements:
-        advimprovementobjs.append(advimprovement)
+    if advimprovements is not False:
+        for advimprovement in advimprovements:
+            advimprovementobjs.append(advimprovement)
+    else:
+        advimprovementobjs = False
 
     return moveobjs, weaponobjs, improvementobjs, advimprovementobjs
 
