@@ -42,7 +42,7 @@
     {% endif %}
     
     {% if gameID %}
-        <img src="https://api.qrserver.com/v1/create-qr-code/?size=200x200&data={{ gameID }}">
+        <img src="https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=http://{{ request.get_host }}/game/{{ gameID }}/choosecharacter/">
 
         <div align="center">
         <h1>Use this code to join the game</h1>
