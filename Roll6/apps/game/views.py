@@ -120,7 +120,8 @@ def update_sheet(request, gameid, hunter):
         harm = hunterobj.harm + int(request.POST['harm'])
         experience = hunterobj.experience + int(request.POST['experience'])
         update_character(str(gameid),hunter,"",charm,cool,sharp,tough,weird,luck,harm,experience,list_to_string(parsed_list[1]),list_to_string(parsed_list[2]),"","","","")
-        return HttpResponse("no errors")
+        url = "/game/" + gameid + "/" + hunter
+        return HttpResponseRedirect(url)
     else:
         move_list = get_moves(hunter)
         gear_list = get_gear(hunter)
@@ -145,8 +146,9 @@ def fillsheet(request, gameid, hunter):
         logic_result = verify_new_character(hunter, parsed_list)
         if len(logic_result) == 0:
             rating_values = get_ratings_values(hunter, parsed_list[3])
-            create_character(str(gameid), hunter, parsed_list[0], "", rating_values[0], rating_values[1], rating_values[2], rating_values[3], rating_values[4], 7, 0, 0, list_to_string(parsed_list[1]), list_to_string(parsed_list[2]), "", "", "", "")
-            return HttpResponse("no errors")
+            create_character(str(gameid),hunter,parsed_list[0],"",rating_values[0],rating_values[1],rating_values[2],rating_values[3],rating_values[4],7,0,0,list_to_string(parsed_list[1]),list_to_string(parsed_list[2]),"","","","")
+            url = "/game/" + gameid + "/" + hunter
+            return HttpResponseRedirect(url)
         else:
             move_list = get_moves(hunter)
             gear_list = get_gear(hunter)
