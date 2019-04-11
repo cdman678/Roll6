@@ -83,6 +83,9 @@ def game(request, gameid, hunter):
         return render(request, 'game/keeper.html', {'gameID': gameid})
     # You are a hunter
     else:
+        if request.method == 'POST':
+            url = "/game/" + gameid + '/' + hunter + '/update'
+            return HttpResponseRedirect(url)
         if hunter in get_char_classes_list():
             hunterobj = get_hunter_info(gameid, hunter)
             if hunterobj is None:

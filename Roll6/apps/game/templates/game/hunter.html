@@ -78,10 +78,13 @@
                 <div style="margin-left:15px;margin-right:15px"> <b>Improvement:</b> {{ improvement.text_improvement }}</div>
             {% endfor %}
         {% endif %}
-
+    <form method="post">
+        {% csrf_token %}
+    <button name="update" value="update" type="submit"> Update yo boi </button>
+    </form>
         <div style="margin-bottom: 8px">
             <h4>Dice Roller:</h4>
-            <button class="myBtn" type="button">Click me to roll dice</button>
+            <button class="myBtn" type="button" id="dicebtn">Click me to roll dice</button>
             <div id="dice"></div>
         </div>
 
@@ -89,7 +92,7 @@
 
     <script>
         $(document).ready(function(){
-      $("button").click(function(){
+      $("#dicebtn").click(function(){
         $("#dice").load("{% url "dice" %}", function(){
           if(statusTxt == "success")
             alert("External content loaded successfully!");
