@@ -96,7 +96,13 @@
                 <div style="margin-left:15px;margin-right:15px"> <b>Improvement:</b> {{ improvement.text_improvement }}</div>
             {% endfor %}
         {% endif %}
+
+        <form method="post">
+        {% csrf_token %}
+        <div class="flex-box"> <button class="myBtn" type="submit" name="update" value = {{hunter.char_class}}>update</button></div>
+        </form>
     {% endif %}
     </div>
+
 
 {% endblock %}
