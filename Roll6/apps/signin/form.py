@@ -6,5 +6,5 @@ class Login(forms.Form):
     password = forms.CharField(widget=forms.PasswordInput(),label="Password")
 
 
-class PartyID:
+class PartyID(forms.Form):
     id = forms.CharField(label="Game Token", max_length=4)

@@ -15,7 +15,7 @@
                 {% csrf_token %}
                 {{ form.as_p }}
                 <button type="submit">Login</button>
-                {% if invalid %}
+                {% if invalidlogin %}
                     <div class="alert alert-danger" role="alert">
                     The account you are trying to log into does not exist or you have used an incorrect password.
                     </div>
@@ -28,16 +28,16 @@
     <div class="w-50 p-0" style="background-color: white; text-align: center">
     <div class="shadow p-3 mb-5 bg-white rounded">
 
-        <form>
-            Enter Party Number: <br /> <br />
-            <div class="form-group">
-                <label for="id">Code:</label>
-                <input id="id" type="text">
-            </div>
-            <div class="form-group">
-                <button type="button" > Submit </button>
-            </div>
-        </form>
+            <form method="post">
+                {% csrf_token %}
+                {{ joinform.as_p }}
+                <button type="submit">Join Game</button>
+                {% if invalidgame %}
+                    <div class="alert alert-danger" role="alert">
+                    The game you are trying to join does not exist.
+                    </div>
+                {% endif %}
+            </form>
 
     </div>
     </div>
