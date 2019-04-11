@@ -51,7 +51,7 @@ def choosecharacter(request, gameid):
         else:
             temp_string = '/game/'+str(gameid)+'/fill/'+hunter_type
             print(request.user)
-            if request.user is not None:
+            if request.user is not None and get_game_by_id(gameid).user_ID != request.user.id:
                 make_hunter_link(request.user.id, gameid)
             return redirect(temp_string)
 
