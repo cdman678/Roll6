@@ -4,6 +4,7 @@ from django.shortcuts import render,redirect
 from .form import *
 from Roll6.apps.game.logic.game_management import *
 from django.contrib.auth import authenticate,login,logout
+from django.contrib.auth.decorators import login_required
 # Create your views here.
 
 
@@ -36,7 +37,7 @@ def index(request):
     else:
         return HttpResponse(render(request,'signin/signin.html', {'form': form, 'joinform': joinform}))
 
-
+@login_required(login_url='index')
 def signout(request):
     if request.user.is_authenticated:
         logout(request)

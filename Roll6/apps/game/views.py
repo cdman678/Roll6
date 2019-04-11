@@ -9,6 +9,8 @@ from Roll6.apps.game.logic.parsing import list_to_string
 from Roll6.apps.game.logic.parsing import parse_push
 from Roll6.apps.game.logic.parsing import removekey
 
+from django.contrib.auth.decorators import login_required
+
 
 # Create your views here.
 
@@ -17,14 +19,13 @@ def dice(request):
     rollmath = roll[0] + roll[1]
     return render(request, 'game/dice.html', {'rollmath': rollmath, "rolls": roll})
 
-
+@login_required(login_url='index')
 def create_game(request):
     if request.method == 'POST':
         game_name = request.POST["gamename"]
         game_id = create_new_game(game_name, request.user.id)
         return render(request, 'game/creategame.html', {"gameID": game_id})
     return render(request, 'game/creategame.html')
-
 
 def join_game(request):
     if request.method == 'POST':
