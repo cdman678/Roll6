@@ -38,12 +38,10 @@ def join_game(request):
 
 def choosecharacter(request, gameid):
     if request.method == 'POST':
-        print(request.POST)
         new_post = removekey(request.POST, "csrfmiddlewaretoken")
         hunter_type = ""
         for the_only in new_post:
             hunter_type = the_only
-        print(hunter_type)
         #If character sheet exists
         if check_character(hunter_type, gameid) == True:
 
