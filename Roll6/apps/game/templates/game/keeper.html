@@ -78,6 +78,12 @@
         </div>
         </form>
 
+    {% if not huntername %}
+        <div>
+        <img src="https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=http://{{ request.get_host }}/game/{{ gameID }}/choosecharacter/">
+        </div>
+    {% endif %}
+
     {% if huntername %}
         <h2>Your hunters name is: {{ hunter.char_name }} <br> Your Character Class is: {{ huntername }}</h2><br>
         <h4>Your stats:</h4>
