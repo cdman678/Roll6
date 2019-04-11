@@ -22,24 +22,24 @@
            Welcome to the Roll6 dashboard!
         </p>
         <div class="flex-container">
-        <div class="flex-box">
-        <h3>Your Keeper Games:</h3>
-        {% for game in keeper_games %}
-            <a href="http://{{ request.get_host }}/game/{{ game.game_ID }}/game/">{{game.game_name}} (ID: {{ game.game_ID }}) (Started: {{game.pub_date}})</a><br />
-        {% endfor %}
-        {% if not keeper_games %}
-            You are not a Keeper in any games!<br />
-        {% endif %}
-        </div>
-        <div class="flex-box">
-        <h3>Your Hunter Games:</h3>
-        {% for game in hunter_games %}
-            <a href="http://{{ request.get_host }}/game/{{ game.game_ID }}/game/">{{game.game_ID.game_name}} (ID: {{ game.game_ID }}) (Started: {{game.game_ID.pub_date}})</a><br />
-        {% endfor %}
-        {% if not hunter_games %}
-            You are not a Hunter in any games!<br />
-        {% endif %}
-        </div>
+            <div class="flex-box">
+                <h3>Your Hunter Games:</h3>
+                {% for game in hunter_games %}
+                    <a href="http://{{ request.get_host }}/game/{{ game.game_ID }}/game/">{{game.game_ID.game_name}} (ID: {{ game.game_ID }}) (Started: {{game.game_ID.pub_date}})</a><br />
+                {% endfor %}
+                {% if not hunter_games %}
+                    You are not a Hunter in any games!<br />
+                {% endif %}
+            </div>
+            <div class="flex-box">
+                <h3>Your Keeper Games:</h3>
+                {% for game in keeper_games %}
+                    <a href="http://{{ request.get_host }}/game/{{ game.game_ID }}/game/">{{game.game_name}} (ID: {{ game.game_ID }}) (Started: {{game.pub_date}})</a><br />
+                {% endfor %}
+                {% if not keeper_games %}
+                    You are not a Keeper in any games!<br />
+                {% endif %}
+            </div>
         </div>
     </div>
 </div>
