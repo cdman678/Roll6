@@ -25,7 +25,7 @@
             <div class="flex-box">
                 <h3>Your Hunter Games:</h3>
                 {% for game in hunter_games %}
-                    <a href="http://{{ request.get_host }}/game/{{ game.game_ID }}/game/">{{game.game_ID.game_name}} (ID: {{ game.game_ID }}) (Started: {{game.game_ID.pub_date}})</a><br />
+                    <a href="http://{{ request.get_host }}/game/{{ game.game_ID.game_ID }}/game/">{{game.game_ID.game_name}} (ID: {{ game.game_ID.game_ID }}) (Started: {{game.game_ID.pub_date}})</a><br />
                 {% endfor %}
                 {% if not hunter_games %}
                     You are not a Hunter in any games!<br />
