@@ -12,12 +12,6 @@ from Roll6.apps.game.logic.dice import dice_roll
 
 # Create your views here.
 
-def index(request):
-    t = get_template('game/keeper.html')
-    create_character('S6LW','mundane',"Jimmy","I have stuff here",0,0,0,0,0,0,0,0,"","","","","","")
-    update_character('S6LW',"mundane","new stuff",0,0,0,0,0,0,0,0,"1,2,4,5","","","","","")
-    return HttpResponse(t.render())
-
 def dice(request):
     roll = dice_roll(2,6)
     rollmath = roll[0] + roll[1]
