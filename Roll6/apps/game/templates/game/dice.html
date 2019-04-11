@@ -2,11 +2,11 @@
 {% load static %}
 <html>
 <body>
-{% if rollmath == 2 %}
-    <img src="{% static 'fucked.gif'%}" width="300" height="300" align="left">
-{% endif %}
 
 <h4>You rolled: {{ rolls.0 }} and {{ rolls.1 }} for a total of {{ rollmath }}</h4>
 
+{% if rollmath == 2 %}
+    <img src="{% static 'fucked.gif'%}" width="auto" height="auto" align="middle" style="margin-bottom: 10px;max-height: 300px;max-width: 300px">
+{% endif %}
 </body>
 </html>
