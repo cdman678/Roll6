@@ -2,9 +2,6 @@
 
 {% block extra_style %}
 
-    div {
-        padding:3px;
-    }
     .flex-container {
         display: flex;
         flex-direction: column;
@@ -93,7 +90,7 @@
         <div style="border: 1.5px solid black;margin-bottom: 5px;">
             <div>
                 {% if type == "chosen" %}
-                    This class is dumb because they can make their own weapon
+                    <h4 style="text-transform: capitalize">under development.</h4>
                 {% elif type == "crooked" %}
                     <h4 style="text-transform: capitalize">You can pick three of these effective weapons:</h4>
                 {% elif type == "divine" %}
