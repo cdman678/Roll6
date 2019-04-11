@@ -38,29 +38,30 @@
 {% block content %}
 
     <div style="padding:10px">
-    <form method="post">
-    {% csrf_token %}
-    <div class="flex-container">
-        <div class="flex-box"> <button class="myBtn" type="submit" name="button">The Chosen</button></div>
-        <div class="flex-box"> <button class="myBtn" type="submit" name="button" value="crooked">The Crooked</button></div>
-        <div class="flex-box"> <button class="myBtn" type="submit" name="button" value="divine">The Divine</button></div>
-        <div class="flex-box"> <button class="myBtn" type="submit" name="button" value="expert">The Expert</button></div>
-        <div class="flex-box"> <button class="myBtn" type="submit" name="button">The Flake</button></div>
-        <div class="flex-box"> <button class="myBtn" type="submit" name="button">The Initiate</button></div>
-        <div class="flex-box"> <button class="myBtn" type="submit" name="button" value="monstrous">The Monstrous</button></div>
-        <div class="flex-box"> <button class="myBtn" type="submit" name="button" value="mundane">The Mundane</button></div>
-        <div class="flex-box"> <button class="myBtn" type="submit" name="button">The Professional</button></div>
-        <div class="flex-box"> <button class="myBtn" type="submit" name="button" value="spell-slinger">The Spell-Slinger</button></div>
-        <div class="flex-box"> <button class="myBtn" type="submit" name="button" value="spooky">The Spooky</button></div>
-        <div class="flex-box"> <button class="myBtn" type="submit" name="button">The Wronged</button></div>
-    </div>
-    </form>
+        <form method="post">
+        {% csrf_token %}
+        <div class="flex-container">
+            <div class="flex-box"> <button class="myBtn" type="submit" name="button">The Chosen</button></div>
+            <div class="flex-box"> <button class="myBtn" type="submit" name="button" value="crooked">The Crooked</button></div>
+            <div class="flex-box"> <button class="myBtn" type="submit" name="button" value="divine">The Divine</button></div>
+            <div class="flex-box"> <button class="myBtn" type="submit" name="button" value="expert">The Expert</button></div>
+            <div class="flex-box"> <button class="myBtn" type="submit" name="button">The Flake</button></div>
+            <div class="flex-box"> <button class="myBtn" type="submit" name="button">The Initiate</button></div>
+            <div class="flex-box"> <button class="myBtn" type="submit" name="button" value="monstrous">The Monstrous</button></div>
+            <div class="flex-box"> <button class="myBtn" type="submit" name="button" value="mundane">The Mundane</button></div>
+            <div class="flex-box"> <button class="myBtn" type="submit" name="button">The Professional</button></div>
+            <div class="flex-box"> <button class="myBtn" type="submit" name="button" value="spell-slinger">The Spell-Slinger</button></div>
+            <div class="flex-box"> <button class="myBtn" type="submit" name="button" value="spooky">The Spooky</button></div>
+            <div class="flex-box"> <button class="myBtn" type="submit" name="button">The Wronged</button></div>
+        </div>
+        </form>
 
     {% if huntername %}
         <h2>Your hunters name is: {{ hunter.char_name }} <br> Your Character Class is: {{ huntername }}</h2><br>
         <h4>Your stats:</h4>
         <div class="flex-container" style="margin-left:5%;margin-right:7%">
             <div class="flex-box"><b>Level:</b> {{ level }} </div>
+            <div class="flex-box"><b>Harm:</b> {{ hunter.harm }} </div>
             <div class="flex-box"><b>Luck:</b> {{ hunter.luck }}</div>
             <div class="flex-box"><b>Experience:</b> {{ level }}</div>
         </div>
