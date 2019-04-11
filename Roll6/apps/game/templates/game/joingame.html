@@ -1,5 +1,30 @@
 {% extends 'base/base.html' %}
 
+{% block extra_style %}
+
+    .myBtn {
+      width: auto;
+      min-width: 75px;
+      float: center;
+      font-size: 15px;
+      text-align: center;
+      border: none;
+      outline: none;
+      background-color: green;
+      color: white;
+      cursor: pointer;
+      padding: 10px;
+      border-radius: 2px;
+      box-shadow: 2px 2px 3px #999;
+      position: relative;
+
+    }
+    .myBtn:hover {
+      background-color: black;
+    }
+
+{% endblock %}
+
 {% block content %}
 <div class="d-flex justify-content-center" xmlns="http://www.w3.org/1999/html" style="padding:10px">
     <div class="w-50 p-0" style="background-color: white; text-align: center">
@@ -13,9 +38,14 @@
                 <input id="id" name="gameid" maxlength="4" type="text">
             </div>
             <div class="form-group">
-                <button type="submit" > Submit </button>
+                <button class="myBtn" type="submit" > Submit </button>
             </div>
-    </form>
+            {% if invalidgame %}
+                <div class="alert alert-danger" role="alert">
+                    The game you are trying to join does not exist.
+                </div>
+            {% endif %}
+        </form>
 
     </div>
     </div>

@@ -12,12 +12,6 @@ from Roll6.apps.game.logic.dice import dice_roll
 
 # Create your views here.
 
-def index(request):
-    t = get_template('game/keeper.html')
-    create_character('S6LW','mundane',"Jimmy","I have stuff here",0,0,0,0,0,0,0,0,"","","","","","")
-    update_character('S6LW',"mundane","new stuff",0,0,0,0,0,0,0,0,"1,2,4,5","","","","","")
-    return HttpResponse(t.render())
-
 def dice(request):
     roll = dice_roll(2,6)
     rollmath = roll[0] + roll[1]
@@ -34,6 +28,8 @@ def create_game(request):
 def join_game(request):
     if request.method == 'POST':
         gameID = request.POST["gameid"]
+        if get_game_by_id(gameID) is None:
+            return render(request,'game/joingame.html', {'invalidgame': True})
         temp_string = '/game/'+gameID+'/choosecharacter/'
         return redirect(temp_string)
     return render(request,'game/joingame.html')
@@ -49,10 +45,15 @@ def choosecharacter(request, gameid):
         print(hunter_type)
         #If character sheet exists
         if check_character(hunter_type, gameid) == True:
+
             temp = "/game/" + gameid + "/" + hunter_type
             return HttpResponseRedirect(temp)
+
         else:
             temp_string = '/game/'+str(gameid)+'/fill/'+hunter_type
+            print(request.user)
+            if request.user is not None:
+                make_hunter_link(request.user.id, gameid)
             return redirect(temp_string)
 
         #Create a new character

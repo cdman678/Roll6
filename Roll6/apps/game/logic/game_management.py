@@ -112,7 +112,11 @@ def generate_hunter_data(game_ID="", hunter=""):
 
 
 def get_hunter_games(user_id=""):
-    return LinkHunter.objects.filter(Q(user_ID=user_id)) if user_id else Game.objects.filter(Q())
+    return LinkHunter.objects.filter(Q(user_ID=user_id)) if user_id else LinkHunter.objects.filter(Q())
+
+
+def make_hunter_link(user_id, game_id):
+    return LinkHunter.objects.create(game_ID=get_game_by_id(game_id),user_ID=user_id)
 
 
 def get_game_by_id(game_id=""):

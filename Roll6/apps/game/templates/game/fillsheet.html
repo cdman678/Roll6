@@ -2,9 +2,6 @@
 
 {% block extra_style %}
 
-    div {
-        padding:3px;
-    }
     .flex-container {
         display: flex;
         flex-direction: column;
@@ -51,109 +48,110 @@
             {% endfor %}
         </div>
     {% endif %}
-
-    <h1 style="text-transform: capitalize">The {{type}}</h1>
-    <div style="border:2px solid green;padding:10px;">
-        <!-- field for character name -->
-        <div class="form-group">
-          <label for="usr">Your Name:</label>
-          <input type="text" class="form-control" id="usr" name="username" style="max-width:350px;border-style: inset;border-width:2px">
-        </div>
-
-        <!-- todo: list out any pre-move selections -->
-
-        <div style="border: 1.5px solid black;margin-bottom: 5px">
-            <!-- explains how many moves they should get -->
-            <div>
-                {% if type in "chosen" %}
-                    <h4>Pick One Of These:</h4>
-                {% elif type in "crooked-expert-monstrous-wronged" %}
-                    <h4>Choose Two Of These:</h4>
-                {% elif type in "divine-flake-initiate-mundane-spell-slinger-spooky-" %}
-                    <h4>Pick Three Of These:</h4>
-                {% elif type in "professional" %}
-                    <h4>Pick Four Of These:</h4>
-                {% endif %}
+    <div style="padding: 10px">
+        <h1 style="text-transform: capitalize;transform: translateY(-10px)">The {{type}}</h1>
+        <div style="border:2px solid green;padding:10px;">
+            <!-- field for character name -->
+            <div class="form-group">
+              <label for="usr">Your Name:</label>
+              <input type="text" class="form-control" id="usr" name="username" style="max-width:350px;border-style: inset;border-width:2px">
             </div>
 
-            <!-- Loop to display moves -->
+            <!-- todo: list out any pre-move selections -->
+
+            <div style="border: 1.5px solid black;margin-bottom: 5px">
+                <!-- explains how many moves they should get -->
+                <div>
+                    {% if type in "chosen" %}
+                        <h4>Pick One Of These:</h4>
+                    {% elif type in "crooked-expert-monstrous-wronged" %}
+                        <h4>Choose Two Of These:</h4>
+                    {% elif type in "divine-flake-initiate-mundane-spell-slinger-spooky-" %}
+                        <h4>Pick Three Of These:</h4>
+                    {% elif type in "professional" %}
+                        <h4>Pick Four Of These:</h4>
+                    {% endif %}
+                </div>
+
+                <!-- Loop to display moves -->
+                    <ul class="flex-container" style="list-style-type:none;">
+                    {% for move in move_list %}
+                        <li class="flex-item" style="padding:2px">
+                            <input id="{{move.move_name}}" type="checkbox" class="form-check-input" name="m_{{move}}" >
+                            <label for="{{move.move_name}}" class="form-check-label" style="padding-left:5px">{{move.move_name}} : {{move.description}}</label><br />
+                        </li>
+                    {% endfor %}
+                    </ul>
+            </div>
+
+            <!-- todo: list out any post-move selections -->
+
+            <!-- explains how much gear they get -->
+            <div style="border: 1.5px solid black;margin-bottom: 5px;">
+                <div>
+                    {% if type == "chosen" %}
+                        <h4 style="text-transform: capitalize">under development.</h4>
+                    {% elif type == "crooked" %}
+                        <h4 style="text-transform: capitalize">You can pick three of these effective weapons:</h4>
+                    {% elif type == "divine" %}
+                        <h4 style="text-transform: capitalize">You can pick one of these divine weapons:</h4>
+                    {% elif type == "expert" %}
+                        <h4 style="text-transform: capitalize">You can pick three of these monster-slaying weapons:</h4>
+                    {% elif type == "flake" %}
+                        <h4 style="text-transform: capitalize">under development.</h4>
+                    {% elif type == "initiate" %}
+                        <h4 style="text-transform: capitalize">under development.</h4>
+                    {% elif type == "monstrous" %}
+                        <h4 style="text-transform: capitalize">If you want, you can take one handy weapon:</h4>
+                    {% elif type == "mundane" %}
+                        <h4 style="text-transform: capitalize">You can take two of the following weapons:</h4>
+                    {% elif type == "professional" %}
+                        <h4 style="text-transform: capitalize">under development.</h4>
+                    {% elif type == "spell-slinger" %}
+                        <h4 style="text-transform: capitalize">You don't need much - aside from any foci or consumables to power your magic.
+                            Still, its good to carry some backup. Pick one:</h4>
+                    {% elif type == "spooky" %}
+                        <h4 style="text-transform: capitalize">You can have any magical items or amulets that you use to invoke your powers.
+                            Additionally, you may take two of the following weapons:</h4>
+                    {% elif type == "wronged" %}
+                        <h4 style="text-transform: capitalize">under development.</h4>
+                    {% endif %}
+                </div>
+                <!-- Loop to display starting gun choices -->
                 <ul class="flex-container" style="list-style-type:none;">
-                {% for move in move_list %}
+                {% for gear in gear_list %}
                     <li class="flex-item" style="padding:2px">
-                        <input id="{{move.move_name}}" type="checkbox" class="form-check-input" name="m_{{move}}" >
-                        <label for="{{move.move_name}}" class="form-check-label" style="padding-left:5px">{{move.move_name}} : {{move.description}}</label><br />
+                        <input type="checkbox" class="form-check-input" id="g_{{gear.gear_ID_id}}" name="g_{{gear.gear_ID_id}}">
+                        <label for="g_{{gear.gear_ID_id}}" class="form-check-label" style="padding-left:3px">{{ gear.gear_ID.weapon_name }},
+                                                        Damage: {{gear.gear_ID.damage }}-harm,
+                                                        Tags: {{ gear.gear_ID.mechanic }}</label><br />
                     </li>
                 {% endfor %}
                 </ul>
-        </div>
-
-        <!-- todo: list out any post-move selections -->
-
-        <!-- explains how much gear they get -->
-        <div style="border: 1.5px solid black;margin-bottom: 5px;">
-            <div>
-                {% if type == "chosen" %}
-                    This class is dumb because they can make their own weapon
-                {% elif type == "crooked" %}
-                    <h4 style="text-transform: capitalize">You can pick three of these effective weapons:</h4>
-                {% elif type == "divine" %}
-                    <h4 style="text-transform: capitalize">You can pick one of these divine weapons:</h4>
-                {% elif type == "expert" %}
-                    <h4 style="text-transform: capitalize">You can pick three of these monster-slaying weapons:</h4>
-                {% elif type == "flake" %}
-                    <h4 style="text-transform: capitalize">under development.</h4>
-                {% elif type == "initiate" %}
-                    <h4 style="text-transform: capitalize">under development.</h4>
-                {% elif type == "monstrous" %}
-                    <h4 style="text-transform: capitalize">If you want, you can take one handy weapon:</h4>
-                {% elif type == "mundane" %}
-                    <h4 style="text-transform: capitalize">You can take two of the following weapons:</h4>
-                {% elif type == "professional" %}
-                    <h4 style="text-transform: capitalize">under development.</h4>
-                {% elif type == "spell-slinger" %}
-                    <h4 style="text-transform: capitalize">You don't need much - aside from any foci or consumables to power your magic.
-                        Still, its good to carry some backup. Pick one:</h4>
-                {% elif type == "spooky" %}
-                    <h4 style="text-transform: capitalize">You can have any magical items or amulets that you use to invoke your powers.
-                        Additionally, you may take two of the following weapons:</h4>
-                {% elif type == "wronged" %}
-                    <h4 style="text-transform: capitalize">under development.</h4>
-                {% endif %}
             </div>
-            <!-- Loop to display starting gun choices -->
-            <ul class="flex-container" style="list-style-type:none;">
-            {% for gear in gear_list %}
-                <li class="flex-item" style="padding:2px">
-                    <input type="checkbox" class="form-check-input" id="g_{{gear.gear_ID_id}}" name="g_{{gear.gear_ID_id}}">
-                    <label for="g_{{gear.gear_ID_id}}" class="form-check-label" style="padding-left:3px">{{ gear.gear_ID.weapon_name }},
-                                                    Damage: {{gear.gear_ID.damage }}-harm,
-                                                    Tags: {{ gear.gear_ID.mechanic }}</label><br />
-                </li>
-            {% endfor %}
-            </ul>
-        </div>
 
-        <!-- todo: list out transport -->
-        <div style="border: 1.5px solid black;margin-bottom: 5px;">
-            <div>
-                <h4 style="text-transform: capitalize">Ratings, pick one line:</h4>
+            <!-- todo: list out transport -->
+            <div style="border: 1.5px solid black;margin-bottom: 5px;">
+                <div>
+                    <h4 style="text-transform: capitalize">Ratings, pick one line:</h4>
+                </div>
+                <!-- Loop to display starting stats -->
+                <ul class="flex-container" style="list-style-type:none;">
+                    {% for line in rating_list %}
+                        <li class="flex-item" style="padding:2px">
+                                <input type="checkbox" class="form-check-input" id="r_{{line}}" name="r_{{line}}">
+                                <label for="r_{{line}}" class="form-check-label" style="padding-left:3px">Charm: {{ line.charm_modifier }},
+                                                                Cool: {{ line.cool_modifier }},
+                                                                Sharp: {{ line.sharp_modifier }},
+                                                                Tough: {{ line.tough_modifier }},
+                                                                Weird: {{ line.weird_modifier }}</label><br />
+                        </li>
+                    {% endfor %}
+                </ul>
             </div>
-            <!-- Loop to display starting stats -->
-            <ul class="flex-container" style="list-style-type:none;">
-                {% for line in rating_list %}
-                    <li class="flex-item" style="padding:2px">
-                            <input type="checkbox" class="form-check-input" id="r_{{line}}" name="r_{{line}}">
-                            <label for="r_{{line}}" class="form-check-label" style="padding-left:3px">Charm: {{ line.charm_modifier }},
-                                                            Cool: {{ line.cool_modifier }},
-                                                            Sharp: {{ line.sharp_modifier }},
-                                                            Tough: {{ line.tough_modifier }},
-                                                            Weird: {{ line.weird_modifier }}</label><br />
-                    </li>
-                {% endfor %}
-            </ul>
+            <!-- this submits all the information that they selected -->
+            <div style="padding-bottom: 7px;padding-top:10px"><button class="myBtn" type="submit">Submit</button></div>
         </div>
-        <!-- this submits all the information that they selected -->
-        <div style="padding-bottom: 7px;padding-top:10px"><button class="myBtn" type="submit">Submit</button></div>
     </div>
 </form>
 {% endblock %}
