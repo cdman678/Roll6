@@ -1,12 +1,13 @@
 from django.shortcuts import *
 from django.template.loader import get_template
-import django.core.exceptions
+import math
 
 from Roll6.apps.game.logic.character_verification import verify_new_character
 from Roll6.apps.game.logic.game_management import *
 from Roll6.apps.game.logic.parsing import list_to_string
 from Roll6.apps.game.logic.parsing import parse_push, string_to_list
 from Roll6.apps.game.logic.parsing import removekey
+from Roll6.apps.game.logic.dice import dice_roll
 
 
 # Create your views here.
@@ -17,6 +18,10 @@ def index(request):
     update_character('S6LW',"mundane","new stuff",0,0,0,0,0,0,0,0,"1,2,4,5","","","","","")
     return HttpResponse(t.render())
 
+def dice(request):
+    roll = dice_roll(2,6)
+    rollmath = roll[0] + roll[1]
+    return render(request, 'game/dice.html',{'rollmath':rollmath, "rolls": roll})
 
 def create_game(request):
     if request.method == 'POST':
@@ -56,16 +61,40 @@ def choosecharacter(request, gameid):
 def game(request, gameid, hunter):
     keeper = get_game_by_id(gameid)
     if keeper.user_ID == request.user.id:
+        if request.method == 'POST':
+            button = request.POST['button']
+            hunterobj = get_hunter_info(gameid, button)
+            if hunterobj is None:
+                return render(request, 'game/keeper.html', {'gameID': gameid , 'error': button})
+            huntername = "The " + button[0:1].upper() + button[1:]
+            level = math.floor(hunterobj.experience / 5)
+            experience = hunterobj.experience % 5
+            moves, weapons, improvements, advimprovements = generate_hunter_data(gameid, button)
+            return render(request, 'game/keeper.html', {'gameID': gameid,
+                                                        'huntername': huntername,
+                                                        'hunter': hunterobj,
+                                                        'level': level,
+                                                        'experience': experience,
+                                                        'moves': moves,
+                                                        'weapons': weapons,
+                                                        'improvements': improvements,
+                                                        'advimprovements': advimprovements})
         return render(request, 'game/keeper.html', {'gameID': gameid})
     #you are a hunter
     else:
         if hunter in get_char_classes_list():
             hunterobj = get_hunter_info(gameid, hunter)
+            if hunterobj is None:
+                return HttpResponseRedirect("/game/" + gameid + '/choosecharacter')
             huntername = "The "+ hunter[0:1].upper() + hunter[1:]
+            level = math.floor(hunterobj.experience / 5)
+            experience = hunterobj.experience % 5
             moves, weapons, improvements, advimprovements = generate_hunter_data(gameid, hunter)
             return render(request, 'game/hunter.html', {'gameID': gameid,
                                                         'huntername': huntername,
                                                         'hunter': hunterobj,
+                                                        'level': level,
+                                                        'experience': experience,
                                                         'moves': moves,
                                                         'weapons': weapons,
                                                         'improvements': improvements,

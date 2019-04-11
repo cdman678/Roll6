@@ -21,7 +21,9 @@ def string_to_list(string):
     :return: the list of strings
     """
     out = []
-    if isinstance(string, str):
+    if string == "":
+        return False
+    elif isinstance(string, str):
         out = string.split(',')
     return out
 

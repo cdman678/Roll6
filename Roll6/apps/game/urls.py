@@ -9,4 +9,5 @@ urlpatterns = [
     path(r'<slug:gameid>/choosecharacter/', views.choosecharacter, name='choosecharacter'),
     path(r'<slug:gameid>/<slug:hunter>/', views.game, name='game'),
     path(r'<slug:gameid>/fill/<slug:hunter>/', views.fillsheet, name='fill-sheet'),
+    path(r'dice/', views.dice, name='dice')
 ]

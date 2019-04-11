@@ -1,5 +1,74 @@
 {% extends "base/base.html" %}
 
 {% block content %}
-    You are the keeper of this game!
+
+    <style>
+    .flex-container{
+        display: flex;
+        flex-wrap: wrap;
+        flex-direction: row;
+        justify-content: left;
+    }
+    .flex-box{
+        width: auto;
+    }
+    </style>
+    <form method="post">
+    {% csrf_token %}
+    <div class="flex-container">
+    <div class="flex-box"> <button type="submit" name="button" value="chosen">The Chosen</button></div>
+    <div class="flex-box"> <button type="submit" name="button" value="crooked">The Crooked</button></div>
+    <div class="flex-box"> <button type="submit" name="button" value="divine">The Divine</button></div>
+    <div class="flex-box"> <button type="submit" name="button" value="expert">The Expert</button></div>
+    <div class="flex-box"> <button type="submit" name="button" value="flake">The Flake</button></div>
+    <div class="flex-box"> <button type="submit" name="button" value="initiate">The Initiate</button></div>
+    <div class="flex-box"> <button type="submit" name="button" value="monstrous">The Monstrous</button></div>
+    <div class="flex-box"> <button type="submit" name="button" value="mundane">The Mundane</button></div>
+    <div class="flex-box"> <button type="submit" name="button" value="professional">The Professional</button></div>
+    <div class="flex-box"> <button type="submit" name="button" value="spell-slinger">The Spell-Slinger</button></div>
+    <div class="flex-box"> <button type="submit" name="button" value="spooky">The Spooky</button></div>
+    <div class="flex-box"> <button type="submit" name="button" value="wronged">The Wronged</button></div>
+    </div>
+    </form>
+
+    {% if huntername %}
+            <h1>Your hunters name is: {{ hunter.char_name }} <br> Your Character Class is: {{ huntername }}</h1><br>
+    <h4>Your stats:</h4>
+    <div class="flex-container">
+    <div class="flex-box">Level: {{ level }} |</div>
+    <div class="flex-box"> Experience: {{ level }}</div>
+    </div>
+    <div class="flex-container">
+        <div class="flex-box">Charm: {{ hunter.charm }} | </div>
+        <div class="flex-box">Cool: {{ hunter.cool }} | </div>
+        <div class="flex-box">Sharp: {{ hunter.sharp }} | </div>
+        <div class="flex-box">Tough: {{ hunter.tough }} | </div>
+        <div class="flex-box">Weird: {{ hunter.weird }} </div>
+    </div>
+
+    <h3>Your current moves are:</h3>
+    {% for move in moves  %}
+        <div> {{move.move_name}} : {{ move.description }}</div>
+    {% endfor %}
+    <h3>Your current Gear is:</h3>
+    {% for weapon in weapons %}
+        <div>Name: {{ weapon.weapon_name }} | Damage: {{ weapon.damage }} | Mechanics: {{ weapon.mechanic }}</div>
+    {% endfor %}
+
+    {% if improvements is not False %}
+        <h3>Your current improvements are:</h3>
+        {% for improvement in improvements %}
+            <div> Improvement: {{ improvement.text_improvement }}</div>
+        {% endfor %}
+    {% endif %}
+
+    {% if advimprovements is not False %}
+        <h3>Your current advanced improvements are:</h3>
+        {% for improvement in advimprovements %}
+            <div> Improvement: {{ improvement.text_improvement }}</div>
+        {% endfor %}
+    {% endif %}
+    {% endif %}
+
+
 {% endblock %}

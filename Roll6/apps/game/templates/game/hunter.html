@@ -1,24 +1,75 @@
 {% extends "base/base.html" %}
+{% load static %}
 
 {% block content %}
+
+    <script>
+    $(document).ready(function(){
+  $("button").click(function(){
+    $("#dice").load("{% url "dice" %}", function(){
+      if(statusTxt == "success")
+        alert("External content loaded successfully!");
+      if(statusTxt == "error")
+        alert("Error: " + xhr.status + ": " + xhr.statusText);
+    });
+  });
+});
+</script>
+
+    <style>
+    .flex-container{
+        display: flex;
+        flex-wrap: wrap;
+        flex-direction: row;
+        justify-content: left;
+    }
+    .flex-box{
+        width: auto;
+    }
+    </style>
+
     <h1>Your hunters name is: {{ hunter.char_name }} <br> Your Character Class is: {{ huntername }}</h1><br>
+    <h4>Your stats:</h4>
+    <div class="flex-container">
+    <div class="flex-box">Level: {{ level }} |</div>
+    <div class="flex-box"> Experience: {{ level }}</div>
+    </div>
+    <div class="flex-container">
+        <div class="flex-box">Charm: {{ hunter.charm }} | </div>
+        <div class="flex-box">Cool: {{ hunter.cool }} | </div>
+        <div class="flex-box">Sharp: {{ hunter.sharp }} | </div>
+        <div class="flex-box">Tough: {{ hunter.tough }} | </div>
+        <div class="flex-box">Weird: {{ hunter.weird }} </div>
+    </div>
+
     <h3>Your current moves are:</h3>
     {% for move in moves  %}
         <div> {{move.move_name}} : {{ move.description }}</div>
     {% endfor %}
     <h3>Your current Gear is:</h3>
     {% for weapon in weapons %}
-        <div>Name: {{ weapon.weapon_name }} | Damage: {{ weapon.damage }}</div>
+        <div>Name: {{ weapon.weapon_name }} | Damage: {{ weapon.damage }} | Mechanics: {{ weapon.mechanic }}</div>
     {% endfor %}
 
-    <h3>Your current improvements are:</h3>
-    {% for improvement in improvements %}
-        <div> Improvement: {{ improvement.text_improvement }}</div>
-    {% endfor %}
+    {% if improvements is not False %}
+        <h3>Your current improvements are:</h3>
+        {% for improvement in improvements %}
+            <div> Improvement: {{ improvement.text_improvement }}</div>
+        {% endfor %}
+    {% endif %}
 
-    <h3>Your current advanced improvements are:</h3>
-    {% for improvement in advimprovements %}
-        <div> Improvement: {{ improvement.text_improvement }}</div>
-    {% endfor %}
+    {% if advimprovements is not False %}
+        <h3>Your current advanced improvements are:</h3>
+        {% for improvement in advimprovements %}
+            <div> Improvement: {{ improvement.text_improvement }}</div>
+        {% endfor %}
+    {% endif %}
 
+    <div>
+    <h3>Dice Roller</h3>
+    <div id="dice"></div>
+    <button type="button"> Click me to roll dice</button>
+    </div>
 {% endblock %}
+
+<img src="">
