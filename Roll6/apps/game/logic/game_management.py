@@ -1,6 +1,5 @@
 import random
 from Roll6.apps.game.logic.parsing import string_to_list
-import re
 
 from django.db.models import Q
 

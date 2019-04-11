@@ -1,16 +1,23 @@
 {% extends "base/base.html" %}
 
 {% block content %}
-    your moves fucker: <br>
+    <h1>Your hunters name is: {{ hunter.char_name }} <br> Your Character Class is: {{ huntername }}</h1><br>
+    <h3>Your current moves are:</h3>
     {% for move in moves  %}
         <div> {{move.move_name}} : {{ move.description }}</div>
     {% endfor %}
-
+    <h3>Your current Gear is:</h3>
     {% for weapon in weapons %}
         <div>Name: {{ weapon.weapon_name }} | Damage: {{ weapon.damage }}</div>
     {% endfor %}
 
+    <h3>Your current improvements are:</h3>
     {% for improvement in improvements %}
+        <div> Improvement: {{ improvement.text_improvement }}</div>
+    {% endfor %}
+
+    <h3>Your current advanced improvements are:</h3>
+    {% for improvement in advimprovements %}
         <div> Improvement: {{ improvement.text_improvement }}</div>
     {% endfor %}
 

@@ -37,10 +37,10 @@ class ActiveGames(models.Model):
 
     move_list = models.CharField(max_length=100)
     weapon_list = models.CharField(max_length=100)
-    history_list = models.CharField(max_length=100)
-    improvements_list = models.CharField(max_length=100)
-    advImprovements_list = models.CharField(max_length=100)
-    char_specific = models.CharField(max_length=100)
+    history_list = models.CharField(max_length=100,blank=True)
+    improvements_list = models.CharField(max_length=100,blank=True)
+    advImprovements_list = models.CharField(max_length=100,blank=True)
+    char_specific = models.CharField(max_length=100,blank=True)
 
     class Meta:
         unique_together = (('game_ID', 'char_class'),)

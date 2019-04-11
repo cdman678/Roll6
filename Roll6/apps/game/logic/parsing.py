@@ -1,3 +1,5 @@
+import re
+
 def fix_id(old_id):
     new_id = re.findall("\d[0-9]*", old_id)
     return new_id

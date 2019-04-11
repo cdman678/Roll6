@@ -61,8 +61,10 @@ def game(request, gameid, hunter):
     else:
         if hunter in get_char_classes_list():
             hunterobj = get_hunter_info(gameid, hunter)
+            huntername = "The "+ hunter[0:1].upper() + hunter[1:]
             moves, weapons, improvements, advimprovements = generate_hunter_data(gameid, hunter)
             return render(request, 'game/hunter.html', {'gameID': gameid,
+                                                        'huntername': huntername,
                                                         'hunter': hunterobj,
                                                         'moves': moves,
                                                         'weapons': weapons,
