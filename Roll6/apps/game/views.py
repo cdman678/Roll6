@@ -13,26 +13,27 @@ from Roll6.apps.game.logic.dice import dice_roll
 # Create your views here.
 
 def dice(request):
-    roll = dice_roll(2,6)
+    roll = dice_roll(2, 6)
     rollmath = roll[0] + roll[1]
-    return render(request, 'game/dice.html',{'rollmath':rollmath, "rolls": roll})
+    return render(request, 'game/dice.html', {'rollmath': rollmath, "rolls": roll})
+
 
 def create_game(request):
     if request.method == 'POST':
-        gameName = request.POST["gamename"]
-        gameID = create_new_game(gameName,request.user.id)
-        return render(request,'game/creategame.html', {"gameID": gameID})
+        game_name = request.POST["gamename"]
+        game_id = create_new_game(game_name, request.user.id)
+        return render(request, 'game/creategame.html', {"gameID": game_id})
     return render(request, 'game/creategame.html')
 
 
 def join_game(request):
     if request.method == 'POST':
-        gameID = request.POST["gameid"]
-        if get_game_by_id(gameID) is None:
-            return render(request,'game/joingame.html', {'invalidgame': True})
-        temp_string = '/game/'+gameID+'/choosecharacter/'
+        game_id = request.POST["gameid"]
+        if get_game_by_id(game_id) is None:
+            return render(request, 'game/joingame.html', {'invalidgame': True})
+        temp_string = '/game/'+game_id+'/choosecharacter/'
         return redirect(temp_string)
-    return render(request,'game/joingame.html')
+    return render(request, 'game/joingame.html')
 
 
 def choosecharacter(request, gameid):
@@ -43,8 +44,8 @@ def choosecharacter(request, gameid):
         for the_only in new_post:
             hunter_type = the_only
         print(hunter_type)
-        #If character sheet exists
-        if check_character(hunter_type, gameid) == True:
+        # If character sheet exists
+        if check_character(hunter_type, gameid):
             return HttpResponse("This character type already exists")
         else:
             temp_string = '/game/'+str(gameid)+'/fill/'+hunter_type
@@ -53,7 +54,7 @@ def choosecharacter(request, gameid):
                 make_hunter_link(request.user.id, gameid)
             return redirect(temp_string)
 
-        #Create a new character
+        # Create a new character
     return render(request, 'game/choosecharacter.html', {'gameID': gameid})
 
 
@@ -64,7 +65,7 @@ def game(request, gameid, hunter):
             button = request.POST['button']
             hunterobj = get_hunter_info(gameid, button)
             if hunterobj is None:
-                return render(request, 'game/keeper.html', {'gameID': gameid , 'error': button})
+                return render(request, 'game/keeper.html', {'gameID': gameid, 'error': button})
             huntername = "The " + button[0:1].upper() + button[1:]
             level = math.floor(hunterobj.experience / 5)
             experience = hunterobj.experience % 5
@@ -79,13 +80,13 @@ def game(request, gameid, hunter):
                                                         'improvements': improvements,
                                                         'advimprovements': advimprovements})
         return render(request, 'game/keeper.html', {'gameID': gameid})
-    #you are a hunter
+    # You are a hunter
     else:
         if hunter in get_char_classes_list():
             hunterobj = get_hunter_info(gameid, hunter)
             if hunterobj is None:
                 return HttpResponseRedirect("/game/" + gameid + '/choosecharacter')
-            huntername = "The "+ hunter[0:1].upper() + hunter[1:]
+            huntername = "The " + hunter[0:1].upper() + hunter[1:]
             level = math.floor(hunterobj.experience / 5)
             experience = hunterobj.experience % 5
             moves, weapons, improvements, advimprovements = generate_hunter_data(gameid, hunter)
@@ -99,8 +100,9 @@ def game(request, gameid, hunter):
                                                         'improvements': improvements,
                                                         'advimprovements': advimprovements})
         else:
-            temp_string = "/game" + gameid + '/choosecharacter'
+            # temp_string = "/game" + gameid + '/choosecharacter'
             return HttpResponseRedirect("/game/" + gameid + '/choosecharacter')
+
 
 def fillsheet(request, gameid, hunter):
     if request.method == 'POST':
@@ -108,7 +110,7 @@ def fillsheet(request, gameid, hunter):
         logic_result = verify_new_character(hunter, parsed_list)
         if len(logic_result) == 0:
             rating_values = get_ratings_values(hunter, parsed_list[3])
-            create_character(str(gameid),hunter,parsed_list[0],"",rating_values[0],rating_values[1],rating_values[2],rating_values[3],rating_values[4],7,0,0,list_to_string(parsed_list[1]),list_to_string(parsed_list[2]),"","","","")
+            create_character(str(gameid), hunter, parsed_list[0], "", rating_values[0], rating_values[1], rating_values[2], rating_values[3], rating_values[4], 7, 0, 0, list_to_string(parsed_list[1]), list_to_string(parsed_list[2]), "", "", "", "")
             return HttpResponse("no errors")
         else:
             move_list = get_moves(hunter)
