@@ -52,6 +52,9 @@ def choosecharacter(request, gameid):
             return HttpResponse("This character type exists")
         else:
             temp_string = '/game/'+str(gameid)+'/fill/'+hunter_type
+            print(request.user)
+            if request.user is not None:
+                make_hunter_link(request.user.id, gameid)
             return redirect(temp_string)
 
         #Create a new character
