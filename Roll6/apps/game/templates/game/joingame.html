@@ -40,7 +40,12 @@
             <div class="form-group">
                 <button class="myBtn" type="submit" > Submit </button>
             </div>
-    </form>
+            {% if invalidgame %}
+                <div class="alert alert-danger" role="alert">
+                    The game you are trying to join does not exist.
+                </div>
+            {% endif %}
+        </form>
 
     </div>
     </div>

@@ -34,6 +34,8 @@ def create_game(request):
 def join_game(request):
     if request.method == 'POST':
         gameID = request.POST["gameid"]
+        if get_game_by_id(gameID) is None:
+            return render(request,'game/joingame.html', {'invalidgame', True})
         temp_string = '/game/'+gameID+'/choosecharacter/'
         return redirect(temp_string)
     return render(request,'game/joingame.html')
