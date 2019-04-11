@@ -29,10 +29,12 @@
     </style>
 
     <h1>Your hunters name is: {{ hunter.char_name }} <br> Your Character Class is: {{ huntername }}</h1><br>
-    <h4>Your stats:</h4>
+    <h3>Your stats:</h3>
     <div class="flex-container">
-    <div class="flex-box">Level: {{ level }} |</div>
-    <div class="flex-box"> Experience: {{ level }}</div>
+        <div class="flex-box">Level: {{ level }} |</div>
+        <div class="flex-box"> Experience: {{ level }} |</div>
+        <div class="flex-box">Luck: {{ hunter.luck }} | </div>
+        <div class="flex-box">Harm: {{ hunter.harm }} </div>
     </div>
     <div class="flex-container">
         <div class="flex-box">Charm: {{ hunter.charm }} | </div>
@@ -40,6 +42,7 @@
         <div class="flex-box">Sharp: {{ hunter.sharp }} | </div>
         <div class="flex-box">Tough: {{ hunter.tough }} | </div>
         <div class="flex-box">Weird: {{ hunter.weird }} </div>
+
     </div>
 
     <h3>Your current moves are:</h3>
@@ -72,4 +75,3 @@
     </div>
 {% endblock %}
 
-<img src="">

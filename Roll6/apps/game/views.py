@@ -49,7 +49,8 @@ def choosecharacter(request, gameid):
         print(hunter_type)
         #If character sheet exists
         if check_character(hunter_type, gameid) == True:
-            return HttpResponse("This character type exists")
+            temp = "/game/" + gameid + "/" + hunter_type
+            return HttpResponseRedirect(temp)
         else:
             temp_string = '/game/'+str(gameid)+'/fill/'+hunter_type
             return redirect(temp_string)
@@ -86,7 +87,7 @@ def game(request, gameid, hunter):
             hunterobj = get_hunter_info(gameid, hunter)
             if hunterobj is None:
                 return HttpResponseRedirect("/game/" + gameid + '/choosecharacter')
-            huntername = "The "+ hunter[0:1].upper() + hunter[1:]
+            huntername = "The " + hunter[0:1].upper() + hunter[1:]
             level = math.floor(hunterobj.experience / 5)
             experience = hunterobj.experience % 5
             moves, weapons, improvements, advimprovements = generate_hunter_data(gameid, hunter)
@@ -102,6 +103,39 @@ def game(request, gameid, hunter):
         else:
             temp_string = "/game" + gameid + '/choosecharacter'
             return HttpResponseRedirect("/game/" + gameid + '/choosecharacter')
+
+
+def update_sheet(request, gameid, hunter):
+    hunterobj = get_hunter_info(gameid, hunter)
+    if request.method == 'POST':
+        parsed_list = parse_push(request.POST)
+        charm = hunterobj.charm + int(request.POST['charm'])
+        cool = hunterobj.cool + int(request.POST['cool'])
+        sharp = hunterobj.sharp + int(request.POST['sharp'])
+        tough = hunterobj.tough + int(request.POST['tough'])
+        weird = hunterobj.weird + int(request.POST['weird'])
+        luck = hunterobj.luck + int(request.POST['luck'])
+        harm = hunterobj.harm + int(request.POST['harm'])
+        experience = hunterobj.experience + int(request.POST['experience'])
+        update_character(str(gameid),hunter,"",charm,cool,sharp,tough,weird,luck,harm,experience,list_to_string(parsed_list[1]),list_to_string(parsed_list[2]),"","","","")
+        return HttpResponse("no errors")
+    else:
+        move_list = get_moves(hunter)
+        gear_list = get_gear(hunter)
+        rating_list = get_ratings(hunter)
+        moves, weapons, improvements, advimprovements = generate_hunter_data(gameid, hunter)
+        huntername = "The " + hunter[0:1].upper() + hunter[1:]
+        level = math.floor(hunterobj.experience / 5)
+        return render(request, 'game/updatesheet.html', {'type': hunter,
+                                                            'move_list': move_list,
+                                                            'gear_list': gear_list,
+                                                            'rating_list': rating_list,
+                                                            'currentmoves': moves,
+                                                            'currentweapons': weapons,
+                                                            'huntername': huntername,
+                                                            'hunterobj': hunterobj,
+                                                            'level': level})
+
 
 def fillsheet(request, gameid, hunter):
     if request.method == 'POST':
